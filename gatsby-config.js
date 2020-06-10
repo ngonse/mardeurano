@@ -1,10 +1,55 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.org/docs/gatsby-config/
- */
+require("dotenv").config();
+const path = require(`path`);
 
 module.exports = {
-  /* Your site config here */
-  plugins: [],
-}
+  plugins: [
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.SPACE_ID,
+        accessToken: process.env.DEBUG
+          ? process.env.CONTENTFUL_ACCESS_TOKEN
+          : process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
+      },
+    },
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: path.join(__dirname, `src`, `images`),
+      },
+    },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images-contentful`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+        ],
+      },
+    },
+    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        shopName: "mardeurano",
+        accessToken: "3b035368dca6781aaa0db871fa404d88",
+        verbose: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `tomato`,
+        showSpinner: false,
+      },
+    },
+  ],
+};
