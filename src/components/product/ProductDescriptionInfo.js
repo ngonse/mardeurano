@@ -23,6 +23,7 @@ const ProductDescriptionInfo = ({
   addToCart,
   addToWishlist,
   addToCompare,
+  images,
 }) => {
   const [selectedProductColor, setSelectedProductColor] = useState(
     product.variation ? product.variation[0].color : ""
@@ -171,7 +172,8 @@ const ProductDescriptionInfo = ({
                   addToast,
                   quantityCount,
                   selectedProductColor,
-                  selectedProductSize
+                  selectedProductSize,
+                  images
                 )
               }
               disabled={productCartQty >= productStock}
@@ -303,7 +305,8 @@ const mapDispatchToProps = dispatch => {
       addToast,
       quantityCount,
       selectedProductColor,
-      selectedProductSize
+      selectedProductSize,
+      images
     ) => {
       dispatch(
         addToCart(
@@ -311,7 +314,8 @@ const mapDispatchToProps = dispatch => {
           addToast,
           quantityCount,
           selectedProductColor,
-          selectedProductSize
+          selectedProductSize,
+          images
         )
       );
     },

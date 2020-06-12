@@ -9,9 +9,14 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass }) => {
         spaceBottomClass ? spaceBottomClass : ""
       }`}
     >
+      <div className="footer-logo">
+        <Link to={"/"}>
+          <img alt="" src={footerLogo} />
+        </Link>
+      </div>
       <p>
         © 2020{" "}
-        <a href="//hasthemes.com" rel="noopener noreferrer" target="_blank">
+        <a href="/" rel="noopener noreferrer" target="_blank">
           Mar de Urano
         </a>
         <br />

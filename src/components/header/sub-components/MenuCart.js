@@ -19,10 +19,7 @@ const MenuCart = ({ cartData, deleteFromCart }) => {
           <ul>
             {cartData.map((single, key) => {
               const imagesProduct = get(single, "images");
-              const imageProduct = get(
-                imagesProduct[0],
-                "localFile.childImageSharp.fixed"
-              );
+
               currency = get(single, "priceRange.maxVariantPrice.currencyCode");
 
               const discountedPrice = null;
@@ -40,7 +37,7 @@ const MenuCart = ({ cartData, deleteFromCart }) => {
                     <Link to={single.handle}>
                       <img
                         alt=""
-                        src={imageProduct.src}
+                        src={imagesProduct[0].src}
                         className="img-fluid"
                       />
                     </Link>
@@ -83,7 +80,7 @@ const MenuCart = ({ cartData, deleteFromCart }) => {
             </h4>
           </div>
           <div className="shopping-cart-btn btn-hover text-center">
-            <Link className="default-btn" to={process.env.PUBLIC_URL + "/cart"}>
+            <Link className="default-btn" to={"/cart"}>
               view cart
             </Link>
             <Link

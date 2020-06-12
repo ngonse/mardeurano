@@ -8,7 +8,7 @@ const MobileLangCurrChange = ({
   currency,
   setCurrency,
   currentLanguageCode,
-  dispatch
+  dispatch,
 }) => {
   const changeLanguageTrigger = e => {
     const languageCode = e.target.value;
@@ -65,12 +65,12 @@ MobileLangCurrChange.propTypes = {
   setCurrency: PropTypes.func,
   currency: PropTypes.object,
   currentLanguageCode: PropTypes.string,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
 };
 
 const mapStateToProps = state => {
   return {
-    currency: state.currencyData
+    currency: state.currencyData,
   };
 };
 
@@ -78,7 +78,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setCurrency: currencyName => {
       dispatch(setCurrency(currencyName));
-    }
+    },
   };
 };
 

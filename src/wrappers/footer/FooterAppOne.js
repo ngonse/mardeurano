@@ -12,6 +12,7 @@ const FooterAppOne = ({
   containerClass,
   extraFooterClass,
   sideMenu,
+  logoFooter,
 }) => {
   const [scroll, setScroll] = useState(0);
   const [top, setTop] = useState(0);
@@ -47,10 +48,7 @@ const FooterAppOne = ({
               sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
             }`}
           >
-            <FooterCopyright
-              footerLogo="/assets/img/logo/logo.png"
-              spaceBottomClass="mb-30"
-            />
+            <FooterCopyright footerLogo={logoFooter} spaceBottomClass="mb-30" />
           </div>
           <div
             className={`${

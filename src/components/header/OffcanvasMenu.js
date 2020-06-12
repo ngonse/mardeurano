@@ -34,7 +34,7 @@ const OffcanvasMenu = ({ activeState, getActiveState }) => {
 
 OffcanvasMenu.propTypes = {
   activeState: PropTypes.bool,
-  getActiveState: PropTypes.func
+  getActiveState: PropTypes.func,
 };
 
 export default OffcanvasMenu;

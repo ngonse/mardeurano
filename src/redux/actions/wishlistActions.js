@@ -8,7 +8,7 @@ export const addToWishlist = (item, addToast) => {
     if (addToast) {
       addToast("Added To Wishlist", {
         appearance: "success",
-        autoDismiss: true
+        autoDismiss: true,
       });
     }
     dispatch({ type: ADD_TO_WISHLIST, payload: item });
@@ -21,7 +21,7 @@ export const deleteFromWishlist = (item, addToast) => {
     if (addToast) {
       addToast("Removed From Wishlist", {
         appearance: "error",
-        autoDismiss: true
+        autoDismiss: true,
       });
     }
     dispatch({ type: DELETE_FROM_WISHLIST, payload: item });
@@ -34,7 +34,7 @@ export const deleteAllFromWishlist = addToast => {
     if (addToast) {
       addToast("Removed All From Wishlist", {
         appearance: "error",
-        autoDismiss: true
+        autoDismiss: true,
       });
     }
     dispatch({ type: DELETE_ALL_FROM_WISHLIST });

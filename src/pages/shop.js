@@ -9,7 +9,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import get from "lodash/get";
 
 import rootReducer from "../redux/reducers/rootReducer";
-import "../assets/scss/style.scss";
 
 import { fetchProducts } from "../redux/actions/productActions";
 
@@ -40,6 +39,7 @@ export const query = graphql`
   query Products {
     allShopifyProduct {
       nodes {
+        id
         shopifyId
         title
         availableForSale

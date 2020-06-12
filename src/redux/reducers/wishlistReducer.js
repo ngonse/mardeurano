@@ -1,7 +1,7 @@
 import {
   ADD_TO_WISHLIST,
   DELETE_FROM_WISHLIST,
-  DELETE_ALL_FROM_WISHLIST
+  DELETE_ALL_FROM_WISHLIST,
 } from "../actions/wishlistActions";
 
 const initState = [];

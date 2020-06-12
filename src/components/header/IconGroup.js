@@ -51,36 +51,16 @@ const IconGroup = ({
         <div className="account-dropdown">
           <ul>
             <li>
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>Login</Link>
+              <Link to={"/login-register"}>Login</Link>
             </li>
             <li>
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>
-                Register
-              </Link>
+              <Link to={"/login-register"}>Register</Link>
             </li>
             <li>
-              <Link to={process.env.PUBLIC_URL + "/my-account"}>
-                my account
-              </Link>
+              <Link to={"/my-account"}>my account</Link>
             </li>
           </ul>
         </div>
-      </div>
-      <div className="same-style header-compare">
-        <Link to={process.env.PUBLIC_URL + "/compare"}>
-          <i className="pe-7s-shuffle" />
-          <span className="count-style">
-            {compareData && compareData.length ? compareData.length : 0}
-          </span>
-        </Link>
-      </div>
-      <div className="same-style header-wishlist">
-        <Link to={process.env.PUBLIC_URL + "/wishlist"}>
-          <i className="pe-7s-like" />
-          <span className="count-style">
-            {wishlistData && wishlistData.length ? wishlistData.length : 0}
-          </span>
-        </Link>
       </div>
       <div className="same-style cart-wrap d-none d-lg-block">
         <button className="icon-cart" onClick={e => handleClick(e)}>
@@ -89,7 +69,6 @@ const IconGroup = ({
             {cartData && cartData.length ? cartData.length : 0}
           </span>
         </button>
-        {/* menu cart */}
         <MenuCart
           cartData={cartData}
           currency={currency}
@@ -97,7 +76,7 @@ const IconGroup = ({
         />
       </div>
       <div className="same-style cart-wrap d-block d-lg-none">
-        <Link className="icon-cart" to={process.env.PUBLIC_URL + "/cart"}>
+        <Link className="icon-cart" to={"/cart"}>
           <i className="pe-7s-shopbag" />
           <span className="count-style">
             {cartData && cartData.length ? cartData.length : 0}

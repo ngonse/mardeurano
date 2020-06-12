@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import MetaTags from "react-meta-tags";
 import { graphql } from "gatsby";
 import { SectionsContainer, Section, Header } from "react-fullpage";
 import { Provider } from "react-redux";
@@ -9,8 +8,9 @@ import { save, load } from "redux-localstorage-simple";
 import { composeWithDevTools } from "redux-devtools-extension";
 import get from "lodash/get";
 
-import rootReducer from "../redux/reducers/rootReducer";
 import "../assets/scss/style.scss";
+
+import rootReducer from "../redux/reducers/rootReducer";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import HeaderApp from "../wrappers/header/HeaderApp";
@@ -27,8 +27,10 @@ const Home = ({ data }) => {
   const sliderData = get(data, "allContentfulHomeSlider.nodes");
 
   sliderData.forEach(element => {
-    anchors.push(element.id);
+    anchors.push(element.slug);
   });
+
+  const logoHeader = get(data, "contentfulInformacionDelSitio.logo.fixed.src");
 
   const options = {
     activeClass: "active",
@@ -48,19 +50,16 @@ const Home = ({ data }) => {
     <Provider store={store}>
       <MarDeUranoApp>
         <Fragment>
-          <MetaTags>
-            <title>Mar de Urano</title>
-            <meta name="description" content="" />
-          </MetaTags>
           <div className="fullpage-slider-wrapper">
             <Header>
               <HeaderApp
+                logo={logoHeader}
                 layout="container-fluid"
                 headerPaddingClass="header-padding-1"
                 headerBgClass="bg-white"
               />
             </Header>
-            <SectionsContainer {...options} className="bg-purple-2">
+            <SectionsContainer {...options} className="bg-gray-7">
               {sliderData &&
                 sliderData.length > 0 &&
                 sliderData.map((single, key) => {
@@ -82,7 +81,7 @@ const Home = ({ data }) => {
                                 />
                                 <div className="slider-btn-11 btn-hover">
                                   <a className="animated" href={single.url}>
-                                    SHOP NOW
+                                    {single.textoBotn}
                                   </a>
                                 </div>
                               </div>
@@ -112,17 +111,28 @@ const Home = ({ data }) => {
 
 export const query = graphql`
   query HomeSlider {
-    allContentfulHomeSlider {
+    allContentfulHomeSlider(sort: { order: DESC, fields: createdAt }) {
       nodes {
         id
         title
         subtitle
+        textoBotn
+        slug
         url
         image {
           title
           fixed(width: 500, height: 540) {
             src
           }
+        }
+      }
+    }
+    contentfulInformacionDelSitio {
+      id
+      nombre
+      logo {
+        fixed(width: 150, height: 30, cropFocus: CENTER) {
+          src
         }
       }
     }

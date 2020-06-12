@@ -6,9 +6,9 @@ import NavMenu from "../../components/header/NavMenu";
 
 import IconGroup from "../../components/header/IconGroup";
 import MobileMenu from "../../components/header/MobileMenu";
-import HeaderTop from "../../components/header/HeaderTop";
 
 const HeaderApp = ({
+  logo,
   layout,
   top,
   borderStyle,
@@ -45,7 +45,7 @@ const HeaderApp = ({
         <div className={layout === "container-fluid" ? layout : "container"}>
           <div className="row">
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
-              <Logo imageUrl="/assets/img/logo/logo.png" logoClass="logo" />
+              <Logo imageUrl={logo} logoClass="logo" />
             </div>
             <div className="col-xl-8 col-lg-8 d-none d-lg-block">
               <NavMenu />
@@ -62,6 +62,7 @@ const HeaderApp = ({
 };
 
 HeaderApp.propTypes = {
+  logo: PropTypes.string,
   borderStyle: PropTypes.string,
   headerPaddingClass: PropTypes.string,
   layout: PropTypes.string,

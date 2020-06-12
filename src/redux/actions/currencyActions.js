@@ -15,7 +15,7 @@ export const setCurrency = currencyName => {
         }
         dispatch({
           type: SET_CURRENCY,
-          payload: { currencyName, currencyRate }
+          payload: { currencyName, currencyRate },
         });
       })
       .catch(err => {

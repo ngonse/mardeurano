@@ -3,7 +3,7 @@ import { SET_CURRENCY } from "../actions/currencyActions";
 const initState = {
   currencySymbol: "$",
   currencyName: "USD",
-  currencyRate: 1
+  currencyRate: 1,
 };
 
 const currencyReducer = (state = initState, action) => {
@@ -15,7 +15,7 @@ const currencyReducer = (state = initState, action) => {
         ...state,
         currencySymbol: "$",
         currencyRate: action.payload.currencyRate,
-        currencyName
+        currencyName,
       };
     }
     if (currencyName === "EUR") {
@@ -23,7 +23,7 @@ const currencyReducer = (state = initState, action) => {
         ...state,
         currencySymbol: "€",
         currencyRate: action.payload.currencyRate,
-        currencyName
+        currencyName,
       };
     }
     if (currencyName === "GBP") {
@@ -31,7 +31,7 @@ const currencyReducer = (state = initState, action) => {
         ...state,
         currencySymbol: "£",
         currencyRate: action.payload.currencyRate,
-        currencyName
+        currencyName,
       };
     }
   }

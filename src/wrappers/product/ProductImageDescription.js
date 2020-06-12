@@ -71,6 +71,7 @@ const ProductImageDescription = ({
               wishlistItem={wishlistItem}
               compareItem={compareItem}
               addToast={addToast}
+              images={imagesArray}
             />
           </div>
         </div>

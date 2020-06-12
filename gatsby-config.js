@@ -3,6 +3,7 @@ const path = require(`path`);
 
 module.exports = {
   plugins: [
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-contentful`,
       options: {
@@ -35,20 +36,13 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-sass`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-shopify`,
       options: {
         shopName: "mardeurano",
         accessToken: "3b035368dca6781aaa0db871fa404d88",
         verbose: false,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-nprogress`,
-      options: {
-        color: `tomato`,
-        showSpinner: false,
       },
     },
   ],

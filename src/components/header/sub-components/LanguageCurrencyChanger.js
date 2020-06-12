@@ -6,7 +6,7 @@ const LanguageCurrencyChanger = ({
   currency,
   setCurrency,
   currentLanguageCode,
-  dispatch
+  dispatch,
 }) => {
   const changeLanguageTrigger = e => {
     const languageCode = e.target.value;
@@ -86,7 +86,7 @@ LanguageCurrencyChanger.propTypes = {
   setCurrency: PropTypes.func,
   currency: PropTypes.object,
   currentLanguageCode: PropTypes.string,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
 };
 
 export default LanguageCurrencyChanger;

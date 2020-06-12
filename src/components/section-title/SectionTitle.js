@@ -6,7 +6,7 @@ const SectionTitle = ({
   subtitleText,
   positionClass,
   spaceClass,
-  borderClass
+  borderClass,
 }) => {
   return (
     <div
@@ -25,7 +25,7 @@ SectionTitle.propTypes = {
   positionClass: PropTypes.string,
   spaceClass: PropTypes.string,
   subtitleText: PropTypes.string,
-  titleText: PropTypes.string
+  titleText: PropTypes.string,
 };
 
 export default SectionTitle;

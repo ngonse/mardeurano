@@ -7,7 +7,7 @@ export const addToCompare = (item, addToast) => {
     if (addToast) {
       addToast("Added To Compare", {
         appearance: "success",
-        autoDismiss: true
+        autoDismiss: true,
       });
     }
     dispatch({ type: ADD_TO_COMPARE, payload: item });
@@ -20,7 +20,7 @@ export const deleteFromCompare = (item, addToast) => {
     if (addToast) {
       addToast("Removed From Compare", {
         appearance: "error",
-        autoDismiss: true
+        autoDismiss: true,
       });
     }
     dispatch({ type: DELETE_FROM_COMPARE, payload: item });
