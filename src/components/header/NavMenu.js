@@ -15,14 +15,11 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
       <nav>
         <ul>
           <li>
-            <Link to={"/"}>{strings["home"]}</Link>
-          </li>
-          <li>
             <Link to={"/shop"}>{strings["shop"]}</Link>
           </li>
           {/* <li>
             <Link to={"/art"}>{strings["art"]}</Link>
-          </li>
+          </li> */}
           <li>
             <Link to={"/collections"}>{strings["collections"]}</Link>
           </li>
@@ -31,7 +28,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
           </li>
           <li>
             <Link to={"/sale"}>{strings["sale"]}</Link>
-          </li> */}
+          </li>
         </ul>
       </nav>
     </div>

@@ -76,20 +76,6 @@ const ProductGridListSingle = ({
             )}
 
             <div className="product-action">
-              <div className="pro-same-action pro-wishlist">
-                <button
-                  className={wishlistItem !== undefined ? "active" : ""}
-                  disabled={wishlistItem !== undefined}
-                  title={
-                    wishlistItem !== undefined
-                      ? "Added to wishlist"
-                      : "Add to wishlist"
-                  }
-                  onClick={() => addToWishlist(product, addToast)}
-                >
-                  <i className="pe-7s-like" />
-                </button>
-              </div>
               <div className="pro-same-action pro-cart">
                 {availableForSale ? (
                   <Link to={url}>Select Option</Link>
@@ -197,35 +183,6 @@ const ProductGridListSingle = ({
                         Out of Stock
                       </button>
                     )}
-                  </div>
-
-                  <div className="shop-list-wishlist ml-10">
-                    <button
-                      className={wishlistItem !== undefined ? "active" : ""}
-                      disabled={wishlistItem !== undefined}
-                      title={
-                        wishlistItem !== undefined
-                          ? "Added to wishlist"
-                          : "Add to wishlist"
-                      }
-                      onClick={() => addToWishlist(product, addToast)}
-                    >
-                      <i className="pe-7s-like" />
-                    </button>
-                  </div>
-                  <div className="shop-list-compare ml-10">
-                    <button
-                      className={compareItem !== undefined ? "active" : ""}
-                      disabled={compareItem !== undefined}
-                      title={
-                        compareItem !== undefined
-                          ? "Added to compare"
-                          : "Add to compare"
-                      }
-                      onClick={() => addToCompare(product, addToast)}
-                    >
-                      <i className="pe-7s-shuffle" />
-                    </button>
                   </div>
                 </div>
               </div>

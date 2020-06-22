@@ -185,32 +185,6 @@ const ProductDescriptionInfo = ({
             <button disabled>Out of Stock</button>
           )}
         </div>
-        <div className="pro-details-wishlist">
-          <button
-            className={wishlistItem !== undefined ? "active" : ""}
-            disabled={wishlistItem !== undefined}
-            title={
-              wishlistItem !== undefined
-                ? "Added to wishlist"
-                : "Add to wishlist"
-            }
-            onClick={() => addToWishlist(product, addToast)}
-          >
-            <i className="pe-7s-like" />
-          </button>
-        </div>
-        <div className="pro-details-compare">
-          <button
-            className={compareItem !== undefined ? "active" : ""}
-            disabled={compareItem !== undefined}
-            title={
-              compareItem !== undefined ? "Added to compare" : "Add to compare"
-            }
-            onClick={() => addToCompare(product, addToast)}
-          >
-            <i className="pe-7s-shuffle" />
-          </button>
-        </div>
       </div>
 
       {product.category ? (
@@ -231,54 +205,6 @@ const ProductDescriptionInfo = ({
       ) : (
         ""
       )}
-      {product.tag ? (
-        <div className="pro-details-meta">
-          <span>Tags :</span>
-          <ul>
-            {product.tag.map((single, key) => {
-              return (
-                <li key={key}>
-                  <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                    {single}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : (
-        ""
-      )}
-
-      <div className="pro-details-social">
-        <ul>
-          <li>
-            <a href="//facebook.com">
-              <i className="fa fa-facebook" />
-            </a>
-          </li>
-          <li>
-            <a href="//dribbble.com">
-              <i className="fa fa-dribbble" />
-            </a>
-          </li>
-          <li>
-            <a href="//pinterest.com">
-              <i className="fa fa-pinterest-p" />
-            </a>
-          </li>
-          <li>
-            <a href="//twitter.com">
-              <i className="fa fa-twitter" />
-            </a>
-          </li>
-          <li>
-            <a href="//linkedin.com">
-              <i className="fa fa-linkedin" />
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
   );
 };

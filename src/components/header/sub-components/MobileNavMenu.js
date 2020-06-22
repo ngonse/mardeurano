@@ -8,15 +8,11 @@ const MobileNavMenu = ({ strings }) => {
     <nav className="offcanvas-navigation" id="offcanvas-navigation">
       <ul>
         <li className="menu-item">
-          <Link to={"/"}>{strings["home"]}</Link>
-        </li>
-
-        <li className="menu-item">
           <Link to={"/shop-grid-standard"}>{strings["shop"]}</Link>
         </li>
-        <li className="menu-item">
+        {/* <li className="menu-item">
           <Link to={"/art"}>{strings["art"]}</Link>
-        </li>
+        </li> */}
         <li className="menu-item">
           <Link to={"/collections"}>{strings["collections"]}</Link>
         </li>

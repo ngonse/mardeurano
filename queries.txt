@@ -1,0 +1,122 @@
+query Products {
+  allShopifyProduct {
+    nodes {
+      id
+      shopifyId
+      title
+      availableForSale
+      descriptionHtml
+      publishedAt
+      handle
+      priceRange {
+        minVariantPrice {
+          currencyCode
+          amount
+        }
+        maxVariantPrice {
+          currencyCode
+          amount
+        }
+      }
+      variants {
+        shopifyId
+        availableForSale
+        selectedOptions {
+          name
+          value
+        }
+      }
+      images {
+        localFile {
+          childImageSharp {
+            fixed(width: 600, height: 800) {
+              src
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query AllProducts {
+  allShopifyProduct {
+    nodes {
+      handle
+    }
+  }
+}
+
+query Product($handle: String!) {
+  shopifyProduct(handle: {eq: $handle}) {
+    shopifyId
+    title
+    availableForSale
+    descriptionHtml
+    handle
+    publishedAt
+    priceRange {
+      minVariantPrice {
+        currencyCode
+        amount
+      }
+      maxVariantPrice {
+        currencyCode
+        amount
+      }
+    }
+    variants {
+      shopifyId
+      availableForSale
+      selectedOptions {
+        name
+        value
+      }
+    }
+    images {
+      localFile {
+        childImageSharp {
+          fixed(width: 600, height: 800) {
+            src
+          }
+        }
+      }
+    }
+  }
+}
+
+query HomeSlider {
+  allContentfulHomeSlider(sort: {order: DESC, fields: createdAt}) {
+    nodes {
+      id
+      title
+      subtitle
+      textoBotn
+      slug
+      url
+      image {
+        title
+        fixed(width: 500, height: 540) {
+          src
+        }
+      }
+    }
+  }
+}
+
+query SiteInfo {
+  contentfulInformacionDelSitio {
+    id
+    nombre
+    logo {
+      fixed(width: 150, height: 30, cropFocus: CENTER) {
+        src
+      }
+    }
+    logoFooter {
+      fixed {
+        src
+      }
+    }
+  }
+}

@@ -4,23 +4,14 @@ import { Link } from "gatsby";
 
 const FooterCopyright = ({ footerLogo, spaceBottomClass }) => {
   return (
-    <div
-      className={`text-center copyright ${
-        spaceBottomClass ? spaceBottomClass : ""
-      }`}
-    >
+    <div>
       <div className="footer-logo">
         <Link to={"/"}>
           <img alt="" src={footerLogo} />
         </Link>
       </div>
       <p>
-        © 2020{" "}
-        <a href="/" rel="noopener noreferrer" target="_blank">
-          Mar de Urano
-        </a>
-        <br />
-        All Rights Reserved
+        © 2020 <Link to={"/"}>Mar de Urano</Link> All Rights Reserved
       </p>
     </div>
   );

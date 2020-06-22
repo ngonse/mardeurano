@@ -37,10 +37,10 @@ const Home = ({ data }) => {
     anchors: anchors,
     arrowNavigation: false,
     className: "SectionsContainer",
+    sectionClassName: "Section",
     delay: 1000,
     navigation: true,
     scrollBar: false,
-    sectionClassName: "Section",
     sectionPaddingTop: "0",
     sectionPaddingBottom: "0",
     verticalAlign: true,
@@ -64,41 +64,49 @@ const Home = ({ data }) => {
                 sliderData.length > 0 &&
                 sliderData.map((single, key) => {
                   const imgSlider = get(single, "image.fixed.src");
+                  const banner = get(single, "banner.fixed.src");
 
                   return (
-                    <Section key={key}>
-                      <div className="slider-section flone-fp-section">
-                        <div className="container">
-                          <div className="row fullpage-slider-wrap-mrg">
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
-                              <div className="slider-content-11 slider-animated-1 fullpage-slider-mrg fullpage-content">
-                                <h3 className="animated">{single.title}</h3>
-                                <h1
-                                  className="animated"
-                                  dangerouslySetInnerHTML={{
-                                    __html: single.subtitle,
-                                  }}
-                                />
-                                <div className="slider-btn-11 btn-hover">
-                                  <a className="animated" href={single.url}>
-                                    {single.textoBotn}
-                                  </a>
+                    <div
+                      className="section-background-image"
+                      style={{ backgroundImage: `url(${banner})` }}
+                    >
+                      <Section key={key}>
+                        <div className="slider-section flone-fp-section">
+                          <div className="container">
+                            <div className="row fullpage-slider-wrap-mrg">
+                              <div className="col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
+                                <div className="slider-content-11 slider-animated-1 fullpage-slider-mrg fullpage-content">
+                                  <h3 className="animated text-white">
+                                    {single.title}
+                                  </h3>
+                                  <h1
+                                    className="animated text-white"
+                                    dangerouslySetInnerHTML={{
+                                      __html: single.subtitle,
+                                    }}
+                                  />
+                                  <div className="slider-btn-11 btn-hover border-white">
+                                    <a className="animated " href={single.url}>
+                                      {single.textoBotn}
+                                    </a>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                              <div className="slider12-img-1 slider-animated-1">
-                                <img
-                                  className="animated"
-                                  alt=""
-                                  src={imgSlider}
-                                />
-                              </div>
+                              {/* <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div className="slider12-img-1 slider-animated-1">
+                                  <img
+                                    className="animated"
+                                    alt=""
+                                    src={imgSlider}
+                                  />
+                                </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </Section>
+                      </Section>
+                    </div>
                   );
                 })}
             </SectionsContainer>
@@ -119,9 +127,14 @@ export const query = graphql`
         textoBotn
         slug
         url
+        banner {
+          fixed(width: 1600, quality: 100) {
+            src
+          }
+        }
         image {
           title
-          fixed(width: 500, height: 540) {
+          fixed(width: 500, height: 540, quality: 100) {
             src
           }
         }
