@@ -42,7 +42,7 @@ module.exports = {
       options: {
         shopName: "mardeurano",
         accessToken: "3b035368dca6781aaa0db871fa404d88",
-        verbose: false,
+        verbose: true,
       },
     },
   ],
