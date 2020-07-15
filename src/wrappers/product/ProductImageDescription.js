@@ -17,11 +17,11 @@ const ProductImageDescription = ({
   compareItems,
 }) => {
   const wishlistItem = wishlistItems.filter(
-    wishlistItem => wishlistItem.id === product.id
+    wishlistItem => wishlistItem.id === product.shopifyId
   )[0];
 
   const compareItem = compareItems.filter(
-    compareItem => compareItem.id === product.id
+    compareItem => compareItem.id === product.shopifyId
   )[0];
 
   const { addToast } = useToasts();

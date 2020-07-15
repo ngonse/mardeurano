@@ -35,7 +35,7 @@ export const getDiscountPrice = (price, discount) => {
 export const getProductCartQuantity = (cartItems, product, color, size) => {
   let productInCart = cartItems.filter(
     single =>
-      single.id === product.id &&
+      single.id === product.shopifyId &&
       (single.selectedProductColor
         ? single.selectedProductColor === color
         : true) &&
@@ -45,12 +45,12 @@ export const getProductCartQuantity = (cartItems, product, color, size) => {
     if (product.variation) {
       return cartItems.filter(
         single =>
-          single.id === product.id &&
+          single.id === product.shopifyId &&
           single.selectedProductColor === color &&
           single.selectedProductSize === size
       )[0].quantity;
     } else {
-      return cartItems.filter(single => product.id === single.id)[0].quantity;
+      return cartItems.filter(single => product.shopifyId === single.id)[0].quantity;
     }
   } else {
     return 0;

@@ -125,7 +125,7 @@ const ProductGridListSingle = ({
             <div className="col-xl-4 col-md-5 col-sm-6">
               <div className="product-list-image-wrap">
                 <div className="product-img">
-                  <Link to={"/product/" + product.id}>
+                  <Link to={"/product/" + product.shopifyId}>
                     <img
                       className="default-img"
                       src={imagesArray[0].src}
