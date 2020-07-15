@@ -40,7 +40,7 @@ const cartReducer = (state = initState, action) => {
     } else {
       const cartItem = cartItems.filter(
         item =>
-          item.id === product.id &&
+          item.id === product.shopifyId &&
           product.selectedProductColor &&
           product.selectedProductColor === item.selectedProductColor &&
           product.selectedProductSize &&

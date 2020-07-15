@@ -1,10 +1,12 @@
+import { combineReducers } from "redux";
+import { createMultilanguageReducer } from "redux-multilanguage";
+
 import currencyReducer from "./currencyReducer";
 import productReducer from "./productReducer";
 import cartReducer from "./cartReducer";
 import wishlistReducer from "./wishlistReducer";
 import compareReducer from "./compareReducer";
-import { combineReducers } from "redux";
-import { createMultilanguageReducer } from "redux-multilanguage";
+import shopifyCheckoutReducer from "./shopifyCheckoutReducer";
 
 const rootReducer = combineReducers({
   multilanguage: createMultilanguageReducer({ currentLanguageCode: "en" }),
@@ -13,6 +15,7 @@ const rootReducer = combineReducers({
   cartData: cartReducer,
   wishlistData: wishlistReducer,
   compareData: compareReducer,
+  shopifyClient: shopifyCheckoutReducer,
 });
 
 export default rootReducer;

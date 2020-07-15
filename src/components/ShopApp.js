@@ -92,7 +92,7 @@ ShopApp.propTypes = {
 const mapStateToProps = state => {
   return {
     products: state.productData.products,
-    holaMundo: state.holaMundo,
+    client: state.client,
   };
 };
 
