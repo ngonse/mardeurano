@@ -15,15 +15,13 @@ import { fetchProducts } from "../redux/actions/productActions";
 import MarDeUranoApp from "../components/MarDeUranoApp";
 
 const Art = ({ data }) => {
-  const products = get(data, "allShopifyProduct.nodes");
-
   const store = createStore(
     rootReducer,
     load(),
     composeWithDevTools(applyMiddleware(thunk, save()))
   );
 
-  store.dispatch(fetchProducts(products));
+  store.dispatch(fetchProducts([]));
 
   return (
     <Provider store={store}>
@@ -39,45 +37,4 @@ const Art = ({ data }) => {
   );
 };
 
-export const query = graphql`
-  query ProductsArt {
-    allShopifyProduct {
-      nodes {
-        shopifyId
-        title
-        availableForSale
-        description
-        handle
-        publishedAt
-        priceRange {
-          minVariantPrice {
-            currencyCode
-            amount
-          }
-          maxVariantPrice {
-            currencyCode
-            amount
-          }
-        }
-        variants {
-          shopifyId
-          availableForSale
-          selectedOptions {
-            name
-            value
-          }
-        }
-        images {
-          localFile {
-            childImageSharp {
-              fixed(width: 600, height: 800) {
-                src
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 export default Art;

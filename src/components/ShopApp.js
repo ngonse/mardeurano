@@ -9,7 +9,11 @@ import ShopLayout from "./layouts/ShopLayout";
 import ShopTopbar from "../wrappers/product/ShopTopbar";
 import ShopProducts from "../wrappers/product/ShopProducts";
 
-const ShopApp = ({ products }) => {
+const ShopApp = props => {
+  console.log(props);
+
+  const { products } = props;
+
   const sortType = "";
   const sortValue = "";
 
@@ -88,6 +92,7 @@ ShopApp.propTypes = {
 const mapStateToProps = state => {
   return {
     products: state.productData.products,
+    holaMundo: state.holaMundo,
   };
 };
 

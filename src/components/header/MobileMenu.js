@@ -59,9 +59,9 @@ const MobileMenu = () => {
 
           <MobileNavMenu />
 
-          <MobileLangCurChange />
+          {/* <MobileLangCurChange /> */}
 
-          <MobileWidgets />
+          {/* <MobileWidgets /> */}
         </div>
       </div>
     </div>

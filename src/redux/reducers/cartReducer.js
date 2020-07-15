@@ -1,4 +1,5 @@
 import uuid from "uuid/v4";
+
 import {
   ADD_TO_CART,
   DECREASE_QUANTITY,
@@ -21,7 +22,7 @@ const cartReducer = (state = initState, action) => {
           {
             ...product,
             quantity: product.quantity ? product.quantity : 1,
-            cartItemId: uuid(),
+            cartItemId: product.shopifyId,
           },
         ];
       } else {

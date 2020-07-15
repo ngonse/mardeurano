@@ -17,9 +17,6 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
           <li>
             <Link to={"/shop"}>{strings["shop"]}</Link>
           </li>
-          {/* <li>
-            <Link to={"/art"}>{strings["art"]}</Link>
-          </li> */}
           <li>
             <Link to={"/collections"}>{strings["collections"]}</Link>
           </li>

@@ -16,9 +16,6 @@ export const addToCart = (
     if (addToast) {
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
     }
-
-    console.log(item);
-
     dispatch({
       type: ADD_TO_CART,
       payload: {

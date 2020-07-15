@@ -63,7 +63,6 @@ const Home = ({ data }) => {
               {sliderData &&
                 sliderData.length > 0 &&
                 sliderData.map((single, key) => {
-                  const imgSlider = get(single, "image.fixed.src");
                   const banner = get(single, "banner.fixed.src");
 
                   return (
@@ -93,15 +92,6 @@ const Home = ({ data }) => {
                                   </div>
                                 </div>
                               </div>
-                              {/* <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div className="slider12-img-1 slider-animated-1">
-                                  <img
-                                    className="animated"
-                                    alt=""
-                                    src={imgSlider}
-                                  />
-                                </div>
-                              </div> */}
                             </div>
                           </div>
                         </div>

@@ -18,14 +18,18 @@ import {
 
 import ShopLayout from "./layouts/ShopLayout";
 
-const Cart = ({
-  cartItems,
-  currency,
-  decreaseQuantity,
-  addToCart,
-  deleteFromCart,
-  deleteAllFromCart,
-}) => {
+const Cart = props => {
+  console.log(props);
+
+  let {
+    cartItems,
+    currency,
+    decreaseQuantity,
+    addToCart,
+    deleteFromCart,
+    deleteAllFromCart,
+  } = props;
+
   const [quantityCount] = useState(1);
   const { addToast } = useToasts();
 
