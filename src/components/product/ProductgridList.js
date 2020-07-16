@@ -3,22 +3,28 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 
 import { addToCart } from "../../redux/actions/cartActions";
+import { addToCheckout } from "../../redux/actions/shopifyCheckoutAction";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
 import { addToCompare } from "../../redux/actions/compareActions";
 
 import ProductGridListSingle from "./ProductGridListSingle";
 
-const ProductGrid = ({
-  products,
-  addToCart,
-  addToWishlist,
-  addToCompare,
-  cartItems,
-  wishlistItems,
-  compareItems,
-  sliderClassName,
-  spaceBottomClass,
-}) => {
+const ProductGrid = props => {
+  //   console.log(props);
+
+  const {
+    products,
+    checkout,
+    addToCart,
+    addToWishlist,
+    addToCompare,
+    cartItems,
+    wishlistItems,
+    compareItems,
+    sliderClassName,
+    spaceBottomClass,
+  } = props;
+
   return (
     <Fragment>
       {products.map(product => {
@@ -68,6 +74,8 @@ const mapStateToProps = state => {
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
     compareItems: state.compareData,
+    shopifyClient: state.shopifyClient,
+    checkout: state.shopifyClient.checkout,
   };
 };
 
@@ -91,6 +99,7 @@ const mapDispatchToProps = dispatch => {
           images
         )
       );
+      dispatch(addToCheckout(item));
     },
     addToWishlist: (item, addToast) => {
       dispatch(addToWishlist(item, addToast));

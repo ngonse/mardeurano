@@ -10,7 +10,7 @@ import ShopTopbar from "../wrappers/product/ShopTopbar";
 import ShopProducts from "../wrappers/product/ShopProducts";
 
 const ShopApp = props => {
-  console.log(props);
+  //   console.log(props);
 
   const { products } = props;
 
@@ -92,7 +92,6 @@ ShopApp.propTypes = {
 const mapStateToProps = state => {
   return {
     products: state.productData.products,
-    client: state.client,
   };
 };
 

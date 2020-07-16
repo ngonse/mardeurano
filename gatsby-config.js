@@ -7,10 +7,10 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: process.env.SPACE_ID,
-        accessToken: process.env.DEBUG
-          ? process.env.CONTENTFUL_ACCESS_TOKEN
-          : process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
+        spaceId: process.env.GATSBY_SPACE_ID,
+        accessToken: process.env.GATSBY_DEBUG
+          ? process.env.GATSBY_CONTENTFUL_ACCESS_TOKEN
+          : process.env.GATSBY_CONTENTFUL_PREVIEW_ACCESS_TOKEN,
       },
     },
     `gatsby-plugin-react-helmet`,
@@ -40,8 +40,8 @@ module.exports = {
     {
       resolve: `gatsby-source-shopify`,
       options: {
-        shopName: "mardeurano",
-        accessToken: "3b035368dca6781aaa0db871fa404d88",
+        shopName: process.env.GATSBY_SHOP_NAME,
+        accessToken: process.env.GATSBY_ACCESS_TOKEN,
         verbose: true,
       },
     },

@@ -16,7 +16,7 @@ const cartReducer = (state = initState, action) => {
   if (action.type === ADD_TO_CART) {
     if (product.variation === undefined) {
       const cartItem = cartItems.filter(
-        item => item.id === product.shopifyId
+        item => item.shopifyId === product.shopifyId
       )[0];
       if (cartItem === undefined) {
         return [
@@ -42,7 +42,7 @@ const cartReducer = (state = initState, action) => {
     } else {
       const cartItem = cartItems.filter(
         item =>
-          item.id === product.shopifyId &&
+          item.shopifyId === product.shopifyId &&
           product.selectedProductColor &&
           product.selectedProductColor === item.selectedProductColor &&
           product.selectedProductSize &&
