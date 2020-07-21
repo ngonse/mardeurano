@@ -14,40 +14,40 @@ const Collections = ({ data }) => {
   );
 };
 
-export const query = graphql`
-  query Prueba {
-    allShopifyCollection(sort: { fields: [title] }) {
-      nodes {
-        id
-        title
-        handle
-        products {
-          title
-          images {
-            localFile {
-              childImageSharp {
-                fixed(width: 600, height: 800) {
-                  src
-                }
-              }
-            }
-          }
-          shopifyId
-          handle
-          description
-          availableForSale
-          priceRange {
-            maxVariantPrice {
-              amount
-            }
-            minVariantPrice {
-              amount
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// export const query = graphql`
+//   query Prueba {
+//     allShopifyCollection(sort: { fields: [title] }) {
+//       nodes {
+//         id
+//         title
+//         handle
+//         products {
+//           title
+//           images {
+//             localFile {
+//               childImageSharp {
+//                 fixed(width: 600, height: 800) {
+//                   src
+//                 }
+//               }
+//             }
+//           }
+//           shopifyId
+//           handle
+//           description
+//           availableForSale
+//           priceRange {
+//             maxVariantPrice {
+//               amount
+//             }
+//             minVariantPrice {
+//               amount
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export default Collections;

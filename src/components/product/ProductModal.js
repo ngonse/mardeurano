@@ -6,6 +6,7 @@ import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import truncate from "lodash/truncate";
 import get from "lodash/get";
+import uniq from "lodash/uniq";
 
 function ProductModal(props) {
   const {
@@ -21,8 +22,8 @@ function ProductModal(props) {
   const [thumbnailSwiper, getThumbnailSwiper] = useState(null);
 
   const [selectedProductColor, setSelectedProductColor] = useState("");
-
   const [selectedProductSize, setSelectedProductSize] = useState("");
+  const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
 
   const [productStock, setProductStock] = useState(
     product.availableForSale ? 10 : 0
@@ -31,11 +32,9 @@ function ProductModal(props) {
   const [quantityCount, setQuantityCount] = useState(1);
 
   const wishlistItem = props.wishlistitem;
-  const compareItem = props.compareitem;
 
   const addToCart = props.addtocart;
   const addToWishlist = props.addtowishlist;
-  const addToCompare = props.addtocompare;
 
   const addToast = props.addtoast;
   const cartItems = props.cartitems;
@@ -44,7 +43,8 @@ function ProductModal(props) {
     cartItems,
     product,
     selectedProductColor,
-    selectedProductSize
+    selectedProductSize,
+    selectedProductMaterial
   );
 
   const shortDescription = get(product, "description");
@@ -92,6 +92,34 @@ function ProductModal(props) {
       </button>
     ),
   };
+
+  const variants = {
+    colors: [],
+    sizes: [],
+    materials: [],
+  };
+
+  //   const variants = [];
+
+  product.variants.forEach(variant => {
+    variant.selectedOptions.forEach(option => {
+      switch (option.name) {
+        case "Size":
+          variants.sizes.push(option.value);
+          break;
+        case "Color":
+          variants.colors.push(option.value);
+          break;
+        case "Material":
+          variants.materials.push(option.value);
+          break;
+        default:
+          break;
+      }
+    });
+  });
+
+  console.log(variants);
 
   return (
     <Fragment>
@@ -160,31 +188,33 @@ function ProductModal(props) {
                 <div className="pro-details-list">
                   <p>{shortDescription}</p>
                 </div>
-
-                {/* {product.variants ? (
-                  <div className="pro-details-size-color">
+                <div className="pro-details-size-color">
+                  {variants.colors.length > 0 && (
                     <div className="pro-details-color-wrap">
-                      <span>{product.variants[0].selectedOptions.name}</span>
+                      <span>Color</span>
                       <div className="pro-details-color-content">
-                        {product.variants.map((single, key) => {
+                        {variants.colors.map((single, key) => {
+                          console.log(single);
+
                           return (
                             <label
-                              className={`pro-details-color-content--single ${single.color}`}
+                              className={`pro-details-color-content--single ${single}`}
                               key={key}
                             >
                               <input
                                 type="radio"
-                                value={single.color}
+                                value={single}
                                 name="product-color"
                                 checked={
-                                  single.color === selectedProductColor
+                                  colors.length === 1 ||
+                                  single === selectedProductColor
                                     ? "checked"
                                     : ""
                                 }
                                 onChange={() => {
-                                  setSelectedProductColor(single.color);
-                                  setSelectedProductSize(single.size[0].name);
-                                  setProductStock(single.size[0].stock);
+                                  setSelectedProductColor(single);
+                                  setSelectedProductSize(sizes[key]);
+                                  setSelectedProductMaterial(materials[key]);
                                   setQuantityCount(1);
                                 }}
                               />
@@ -194,49 +224,74 @@ function ProductModal(props) {
                         })}
                       </div>
                     </div>
+                  )}
+
+                  {sizes.length > 0 && (
                     <div className="pro-details-size">
                       <span>Size</span>
                       <div className="pro-details-size-content">
-                        {product.variation &&
-                          product.variation.map(single => {
-                            return single.color === selectedProductColor
-                              ? single.size.map((singleSize, key) => {
-                                  return (
-                                    <label
-                                      className={`pro-details-size-content--single`}
-                                      key={key}
-                                    >
-                                      <input
-                                        type="radio"
-                                        value={singleSize.name}
-                                        checked={
-                                          singleSize.name ===
-                                          selectedProductSize
-                                            ? "checked"
-                                            : ""
-                                        }
-                                        onChange={() => {
-                                          setSelectedProductSize(
-                                            singleSize.name
-                                          );
-                                          setProductStock(singleSize.stock);
-                                          setQuantityCount(1);
-                                        }}
-                                      />
-                                      <span className="size-name">
-                                        {singleSize.name}
-                                      </span>
-                                    </label>
-                                  );
-                                })
-                              : "";
-                          })}
+                        {sizes.map((single, key) => {
+                          return (
+                            <label
+                              className={`pro-details-size-content--single`}
+                              key={key}
+                            >
+                              <input
+                                type="radio"
+                                value={single}
+                                checked={
+                                  sizes.length === 1 ||
+                                  single === selectedProductSize
+                                    ? "checked"
+                                    : ""
+                                }
+                                onChange={() => {
+                                  setSelectedProductSize(single);
+                                  setSelectedProductMaterial(single);
+                                  setSelectedProductSize(single);
+                                  setQuantityCount(1);
+                                }}
+                              />
+                              <span className="size-name">{single}</span>
+                            </label>
+                          );
+                        })}
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  ""
-                )} */}
+                  )}
+
+                  {materials.length > 0 && (
+                    <div className="pro-details-size">
+                      <span>Material</span>
+                      <div className="pro-details-size-content">
+                        {materials.map((single, key) => {
+                          return (
+                            <label
+                              className={`pro-details-size-content--single`}
+                              key={key}
+                            >
+                              <input
+                                type="radio"
+                                value={single}
+                                checked={
+                                  materials.length === 1 ||
+                                  single === selectedProductMaterial
+                                    ? "checked"
+                                    : ""
+                                }
+                                onChange={() => {
+                                  setSelectedProductMaterial(single);
+                                  setQuantityCount(1);
+                                }}
+                              />
+                              <span className="size-name">{single}</span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
 
                 <div className="pro-details-quality">
                   <div className="cart-plus-minus">
@@ -270,7 +325,9 @@ function ProductModal(props) {
                     </button>
                   </div>
                   <div className="pro-details-cart btn-hover">
-                    {productStock && productStock > 0 ? (
+                    {selectedProductMaterial &&
+                    selectedProductSize &&
+                    selectedProductColor ? (
                       <button
                         onClick={() =>
                           addToCart(
@@ -279,6 +336,7 @@ function ProductModal(props) {
                             quantityCount,
                             selectedProductColor,
                             selectedProductSize,
+                            selectedProductMaterial,
                             images
                           )
                         }
@@ -288,10 +346,15 @@ function ProductModal(props) {
                         Add To Cart{" "}
                       </button>
                     ) : (
-                      <button disabled>Out of Stock</button>
+                      <button disabled>Add To Cart </button>
                     )}
                   </div>
                 </div>
+                {!selectedProductMaterial &&
+                  !selectedProductSize &&
+                  !selectedProductColor && (
+                    <small>Select Size, color and material</small>
+                  )}
               </div>
             </div>
           </div>

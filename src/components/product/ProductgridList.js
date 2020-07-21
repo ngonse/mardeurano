@@ -3,24 +3,18 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 
 import { addToCart } from "../../redux/actions/cartActions";
-import { addToCheckout } from "../../redux/actions/shopifyCheckoutAction";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
-import { addToCompare } from "../../redux/actions/compareActions";
 
 import ProductGridListSingle from "./ProductGridListSingle";
 
 const ProductGrid = props => {
-  //   console.log(props);
-
   const {
     products,
-    checkout,
     addToCart,
     addToWishlist,
     addToCompare,
     cartItems,
     wishlistItems,
-    compareItems,
     sliderClassName,
     spaceBottomClass,
   } = props;
@@ -44,11 +38,6 @@ const ProductGrid = props => {
                 wishlistItem => wishlistItem.id === product.shopifyId
               )[0]
             }
-            compareItem={
-              compareItems.filter(
-                compareItem => compareItem.id === product.shopifyId
-              )[0]
-            }
             key={product.shopifyId}
           />
         );
@@ -59,7 +48,6 @@ const ProductGrid = props => {
 
 ProductGrid.propTypes = {
   addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
   addToWishlist: PropTypes.func,
   cartItems: PropTypes.array,
   compareItems: PropTypes.array,
@@ -73,7 +61,6 @@ const mapStateToProps = state => {
   return {
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
-    compareItems: state.compareData,
     shopifyClient: state.shopifyClient,
     checkout: state.shopifyClient.checkout,
   };
@@ -87,6 +74,7 @@ const mapDispatchToProps = dispatch => {
       quantityCount,
       selectedProductColor,
       selectedProductSize,
+      selectedProductMaterial,
       images
     ) => {
       dispatch(
@@ -96,16 +84,14 @@ const mapDispatchToProps = dispatch => {
           quantityCount,
           selectedProductColor,
           selectedProductSize,
+          selectedProductMaterial,
           images
         )
       );
-      dispatch(addToCheckout(item));
+      //   dispatch(addToCheckout(item));
     },
     addToWishlist: (item, addToast) => {
       dispatch(addToWishlist(item, addToast));
-    },
-    addToCompare: (item, addToast) => {
-      dispatch(addToCompare(item, addToast));
     },
   };
 };

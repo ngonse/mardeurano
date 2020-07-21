@@ -16,11 +16,20 @@ import MarDeUranoApp from "../components/MarDeUranoApp";
 import HeaderApp from "../wrappers/header/HeaderApp";
 
 const Home = ({ data }) => {
-  const store = createStore(
-    rootReducer,
-    load(),
-    composeWithDevTools(applyMiddleware(thunk, save()))
-  );
+  let store;
+
+  if (window !== undefined) {
+    store = createStore(
+      rootReducer,
+      load(),
+      composeWithDevTools(applyMiddleware(thunk, save()))
+    );
+  } else {
+    store = createStore(
+      rootReducer,
+      composeWithDevTools(applyMiddleware(thunk))
+    );
+  }
 
   const anchors = [];
 

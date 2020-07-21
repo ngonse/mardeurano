@@ -10,6 +10,7 @@ export const addToCart = (
   quantityCount,
   selectedProductColor,
   selectedProductSize,
+  selectedProductMaterial,
   images
 ) => {
   return dispatch => {
@@ -30,6 +31,11 @@ export const addToCart = (
           ? selectedProductSize
           : item.selectedProductSize
           ? item.selectedProductSize
+          : null,
+        selectedProductMaterial: selectedProductMaterial
+          ? selectedProductMaterial
+          : item.selectedProductMaterial
+          ? item.selectedProductMaterial
           : null,
         images: images,
       },

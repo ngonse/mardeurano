@@ -17,7 +17,7 @@ const ShopApp = props => {
   const sortType = "";
   const sortValue = "";
 
-  const [layout, setLayout] = useState("grid three-column");
+  const [layout, setLayout] = useState("grid four-column");
   const [filterSortType, setFilterSortType] = useState("");
   const [filterSortValue, setFilterSortValue] = useState("");
   const [offset, setOffset] = useState(0);
@@ -25,7 +25,7 @@ const ShopApp = props => {
   const [currentData, setCurrentData] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
 
-  const pageLimit = 15;
+  const pageLimit = 16;
 
   const getLayout = layout => {
     setLayout(layout);
@@ -51,7 +51,7 @@ const ShopApp = props => {
   return (
     <ShopLayout headerTop="visible">
       <div className="shop-area pt-95 pb-100">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12">
               <ShopTopbar

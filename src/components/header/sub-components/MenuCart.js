@@ -4,13 +4,18 @@ import { Link } from "gatsby";
 import { useToasts } from "react-toast-notifications";
 import get from "lodash/get";
 
-import { getDiscountPrice } from "../../../helpers/product";
+import { handleCheckout } from "../../../helpers/checkout";
 
 const MenuCart = ({ cartData, deleteFromCart }) => {
   let cartTotalPrice = 0;
   const { addToast } = useToasts();
 
   let currency = "USD";
+
+  const onHandleCheckout = e => {
+    e.preventDefault();
+    handleCheckout(cartData);
+  };
 
   return (
     <div className="shopping-cart-content">
@@ -83,12 +88,13 @@ const MenuCart = ({ cartData, deleteFromCart }) => {
             <Link className="default-btn" to={"/cart"}>
               view cart
             </Link>
-            <Link
+            <a
+              href="#checkout"
+              onClick={onHandleCheckout}
               className="default-btn"
-              to={process.env.PUBLIC_URL + "/checkout"}
             >
               checkout
-            </Link>
+            </a>
           </div>
         </Fragment>
       ) : (

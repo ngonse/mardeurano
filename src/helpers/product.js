@@ -32,7 +32,13 @@ export const getDiscountPrice = (price, discount) => {
 };
 
 // get product cart quantity
-export const getProductCartQuantity = (cartItems, product, color, size) => {
+export const getProductCartQuantity = (
+  cartItems,
+  product,
+  color,
+  size,
+  material
+) => {
   let productInCart = cartItems.filter(
     single =>
       single.id === product.shopifyId &&
@@ -50,7 +56,8 @@ export const getProductCartQuantity = (cartItems, product, color, size) => {
           single.selectedProductSize === size
       )[0].quantity;
     } else {
-      return cartItems.filter(single => product.shopifyId === single.id)[0].quantity;
+      return cartItems.filter(single => product.shopifyId === single.id)[0]
+        .quantity;
     }
   } else {
     return 0;

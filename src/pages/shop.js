@@ -19,14 +19,23 @@ import ShopApp from "../components/ShopApp";
 const Shop = ({ data }) => {
   const products = get(data, "allShopifyProduct.nodes");
 
-  const store = createStore(
-    rootReducer,
-    load(),
-    composeWithDevTools(applyMiddleware(thunk, save()))
-  );
+  let store;
+
+  if (window !== undefined) {
+    store = createStore(
+      rootReducer,
+      load(),
+      composeWithDevTools(applyMiddleware(thunk, save()))
+    );
+  } else {
+    store = createStore(
+      rootReducer,
+      composeWithDevTools(applyMiddleware(thunk))
+    );
+  }
 
   store.dispatch(fetchProducts(products));
-  store.dispatch(createShopifyClient());
+  //   store.dispatch(createShopifyClient());
 
   return (
     <Provider store={store}>
@@ -39,7 +48,7 @@ const Shop = ({ data }) => {
 
 export const query = graphql`
   query Products {
-    allShopifyProduct {
+    allShopifyProduct(sort: { order: ASC, fields: title }) {
       nodes {
         id
         shopifyId

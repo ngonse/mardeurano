@@ -11,7 +11,6 @@ const ProductGridListSingle = ({
   product,
   addToCart,
   addToWishlist,
-  addToCompare,
   cartItem,
   wishlistItem,
   compareItem,
@@ -50,7 +49,7 @@ const ProductGridListSingle = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-4 col-sm-6 ${
+        className={`col-xl-3 col-sm-6 ${
           sliderClassName ? sliderClassName : ""
         }`}
       >
@@ -205,7 +204,6 @@ const ProductGridListSingle = ({
         compareitem={compareItem}
         addtocart={addToCart}
         addtowishlist={addToWishlist}
-        addtocompare={addToCompare}
         addtoast={addToast}
       />
     </Fragment>
@@ -217,7 +215,6 @@ ProductGridListSingle.propTypes = {
   addToCompare: PropTypes.func,
   addToWishlist: PropTypes.func,
   cartItem: PropTypes.object,
-  compareItem: PropTypes.object,
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
