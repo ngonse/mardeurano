@@ -70,6 +70,7 @@ export const query = graphql`
         variants {
           shopifyId
           availableForSale
+          title
           selectedOptions {
             name
             value

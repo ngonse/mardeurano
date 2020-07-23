@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 
 import ShopLayout from "../components/layouts/ShopLayout";
 
-import RelatedProductSlider from "../wrappers/product/RelatedProductSlider";
-import ProductDescriptionTab from "../wrappers/product/ProductDescriptionTab";
+// import RelatedProductSlider from "../wrappers/product/RelatedProductSlider";
+// import ProductDescriptionTab from "../wrappers/product/ProductDescriptionTab";
 import ProductImageDescription from "../wrappers/product/ProductImageDescription";
 
 const ProductTabLeft = ({ product }) => {
@@ -17,14 +17,9 @@ const ProductTabLeft = ({ product }) => {
         product={product}
         galleryType="leftThumb"
       />
-      <ProductDescriptionTab
+      {/* <ProductDescriptionTab
         spaceBottomClass="pb-90"
         productFullDesc={product.descriptionHtml}
-      />
-
-      {/* <RelatedProductSlider
-        spaceBottomClass="pb-95"
-        category={product.category[0]}
       /> */}
     </ShopLayout>
   );

@@ -6,7 +6,7 @@ import productReducer from "./productReducer";
 import cartReducer from "./cartReducer";
 import wishlistReducer from "./wishlistReducer";
 import compareReducer from "./compareReducer";
-import shopifyCheckoutReducer from "./shopifyCheckoutReducer";
+import collectionReducer from "./collectionReducer";
 
 const rootReducer = combineReducers({
   multilanguage: createMultilanguageReducer({ currentLanguageCode: "en" }),
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   cartData: cartReducer,
   wishlistData: wishlistReducer,
   compareData: compareReducer,
-  shopifyClient: shopifyCheckoutReducer,
+  collectionData: collectionReducer,
 });
 
 export default rootReducer;

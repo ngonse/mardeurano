@@ -1,5 +1,3 @@
-import uuid from "uuid/v4";
-
 import {
   ADD_TO_CART,
   DECREASE_QUANTITY,
@@ -14,7 +12,9 @@ const cartReducer = (state = initState, action) => {
     product = action.payload;
 
   if (action.type === ADD_TO_CART) {
-    if (product.variation === undefined) {
+    console.log(product.selectedProductSize);
+
+    if (product.variants === undefined) {
       const cartItem = cartItems.filter(
         item => item.shopifyId === product.shopifyId
       )[0];
@@ -40,41 +40,54 @@ const cartReducer = (state = initState, action) => {
         );
       }
     } else {
-      const cartItem = cartItems.filter(
-        item =>
+      const cartItem = cartItems.filter(item => {
+        return (
           item.shopifyId === product.shopifyId &&
           product.selectedProductColor &&
           product.selectedProductColor === item.selectedProductColor &&
           product.selectedProductSize &&
           product.selectedProductSize === item.selectedProductSize &&
-          (product.cartItemId ? product.cartItemId === item.cartItemId : true)
-      )[0];
+          product.selectedProductMaterial &&
+          product.selectedProductMaterial === item.selectedProductMaterial &&
+          (product.shopifyId ? product.shopifyId === item.shopifyId : true)
+        );
+      })[0];
 
       if (cartItem === undefined) {
+        console.log("cartItem === undefined", cartItem);
+
         return [
           ...cartItems,
           {
             ...product,
             quantity: product.quantity ? product.quantity : 1,
-            cartItemId: uuid(),
+            cartItemId: product.shopifyId,
           },
         ];
       } else if (
         cartItem !== undefined &&
         (cartItem.selectedProductColor !== product.selectedProductColor ||
-          cartItem.selectedProductSize !== product.selectedProductSize)
+          cartItem.selectedProductSize !== product.selectedProductSize ||
+          cartItem.selectedProductMaterial !== product.selectedProductMaterial)
       ) {
+        console.log("cartItem !== undefined", cartItem);
+
         return [
           ...cartItems,
           {
             ...product,
             quantity: product.quantity ? product.quantity : 1,
-            cartItemId: uuid(),
+            cartItemId: product.shopifyId,
           },
         ];
       } else {
+        console.log("ultimo", cartItem);
+
         return cartItems.map(item =>
-          item.cartItemId === cartItem.cartItemId
+          item.shopifyId === cartItem.shopifyId &&
+          cartItem.selectedProductColor === item.selectedProductColor &&
+          cartItem.selectedProductSize === item.selectedProductSize &&
+          cartItem.selectedProductMaterial === item.selectedProductMaterial
             ? {
                 ...item,
                 quantity: product.quantity
@@ -82,6 +95,7 @@ const cartReducer = (state = initState, action) => {
                   : item.quantity + 1,
                 selectedProductColor: product.selectedProductColor,
                 selectedProductSize: product.selectedProductSize,
+                selectedProductMaterial: product.selectedProductMaterial,
               }
             : item
         );

@@ -61,7 +61,6 @@ const mapStateToProps = state => {
   return {
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
-    shopifyClient: state.shopifyClient,
     checkout: state.shopifyClient.checkout,
   };
 };

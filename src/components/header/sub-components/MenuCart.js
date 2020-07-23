@@ -23,6 +23,8 @@ const MenuCart = ({ cartData, deleteFromCart }) => {
         <Fragment>
           <ul>
             {cartData.map((single, key) => {
+              /* console.log(single); */
+
               const imagesProduct = get(single, "images");
 
               currency = get(single, "priceRange.maxVariantPrice.currencyCode");

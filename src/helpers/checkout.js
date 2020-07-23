@@ -9,11 +9,14 @@ const isBrowser = typeof window !== "undefined";
 
 export const handleCheckout = cartData => {
   let lineItems = cartData.map(item => {
+    console.log(item);
+
     const variant = item.variants.filter(variante => {
-      const tipo = variante.selectedOptions.filter(
-        tipo => tipo.name === "Size"
+      return (
+        variante.color === item.selectedProductColor &&
+        variante.size === item.selectedProductSize &&
+        variante.material === item.selectedProductMaterial
       );
-      return tipo[0].value === item.selectedProductSize;
     });
 
     return {

@@ -34,3 +34,22 @@
   background-color: #fff !important;
   box-shadow: 0px -2px 5px 0px #00000096;
 }
+
+.product-details-content
+  .pro-details-size-color
+  .pro-details-color-wrap
+  .pro-details-color-content--single {
+  height: 20px;
+  width: 20px;
+}
+
+.product-details-content
+  .pro-details-size-color
+  .pro-details-color-wrap
+  .pro-details-color-content--single
+  .checkmark:after {
+  top: -4px;
+  left: -1px;
+  width: 22px;
+  height: 22px;
+}

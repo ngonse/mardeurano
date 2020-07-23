@@ -18,12 +18,20 @@ import ShopProduct from "../components/ShopProduct";
 const Shop = ({ data }) => {
   const product = get(data, "shopifyProduct");
 
-  const store = createStore(
-    rootReducer,
-    load(),
-    composeWithDevTools(applyMiddleware(thunk, save()))
-  );
+  let store;
 
+  if (window !== undefined) {
+    store = createStore(
+      rootReducer,
+      load(),
+      composeWithDevTools(applyMiddleware(thunk, save()))
+    );
+  } else {
+    store = createStore(
+      rootReducer,
+      composeWithDevTools(applyMiddleware(thunk))
+    );
+  }
   store.dispatch(fetchProducts([product]));
 
   return (
@@ -56,6 +64,7 @@ export const query = graphql`
       }
       variants {
         shopifyId
+        title
         availableForSale
         selectedOptions {
           name

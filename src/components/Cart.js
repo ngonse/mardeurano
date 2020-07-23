@@ -20,7 +20,7 @@ import {
 import ShopLayout from "./layouts/ShopLayout";
 
 const Cart = props => {
-  console.log(props);
+  //   console.log(props);
 
   let {
     cartItems,
@@ -93,7 +93,7 @@ const Cart = props => {
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
-                                  <Link to={`/${cartItem.slug}`}>
+                                  <Link to={`/${cartItem.handle}`}>
                                     <img
                                       className="img-fluid"
                                       src={imagesProduct[0].src}
@@ -103,7 +103,7 @@ const Cart = props => {
                                 </td>
 
                                 <td className="product-name">
-                                  <Link to={`/${cartItem.slug}`}>
+                                  <Link to={`/${cartItem.handle}`}>
                                     {cartItem.title}
                                   </Link>
                                   {cartItem.selectedProductColor ? (
@@ -119,6 +119,16 @@ const Cart = props => {
                                     <div className="cart-item-variation">
                                       <span>
                                         Size: {cartItem.selectedProductSize}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )}
+                                  {cartItem.selectedProductMaterial ? (
+                                    <div className="cart-item-variation">
+                                      <span>
+                                        Material:{" "}
+                                        {cartItem.selectedProductMaterial}
                                       </span>
                                     </div>
                                   ) : (

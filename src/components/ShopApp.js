@@ -10,8 +10,6 @@ import ShopTopbar from "../wrappers/product/ShopTopbar";
 import ShopProducts from "../wrappers/product/ShopProducts";
 
 const ShopApp = props => {
-  //   console.log(props);
-
   const { products } = props;
 
   const sortType = "";

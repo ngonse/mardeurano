@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import truncate from "lodash/truncate";
+import uniq from "lodash/uniq";
 
 import { getProductCartQuantity } from "../../helpers/product";
 import { addToCart } from "../../redux/actions/cartActions";
@@ -25,12 +26,46 @@ const ProductDescriptionInfo = ({
   addToCompare,
   images,
 }) => {
-  const [selectedProductColor, setSelectedProductColor] = useState(
-    product.variation ? product.variation[0].color : ""
-  );
-  const [selectedProductSize, setSelectedProductSize] = useState(
-    product.variation ? product.variation[0].size[0].name : ""
-  );
+  const variants = {
+    colors: [],
+    sizes: [],
+    materials: [],
+  };
+
+  product.variants.forEach((variant, index) => {
+    variant.selectedOptions.forEach(option => {
+      switch (option.name) {
+        case "Size":
+          variants.sizes.push(option.value);
+          product.variants[index].size = option.value;
+          break;
+        case "Color":
+          variants.colors.push(option.value);
+          product.variants[index].color = option.value;
+          break;
+        case "Material":
+          variants.materials.push(option.value);
+          product.variants[index].material = option.value;
+          break;
+        default:
+          break;
+      }
+    });
+  });
+
+  variants.colors = uniq(variants.colors);
+  variants.sizes = uniq(variants.sizes);
+  variants.materials = uniq(variants.materials);
+
+  const allVariants = variants;
+
+  const [productVariant, setProductVariant] = useState(variants);
+  const [productVariants, setProductVariants] = useState(product.variants);
+
+  const [selectedProductColor, setSelectedProductColor] = useState("");
+  const [selectedProductSize, setSelectedProductSize] = useState("");
+  const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
+
   const [productStock, setProductStock] = useState(
     product.variation ? product.variation[0].size[0].stock : product.stock
   );
@@ -47,6 +82,67 @@ const ProductDescriptionInfo = ({
   const shortDescription = get(product, "descriptionHtml")
     ? truncate(get(product, "descriptionHtml"), 100)
     : "";
+
+  const filterByType = (type, value) => {
+    // 1 = color
+    // 2 = size
+    // 3 = material
+
+    const variantsType = {
+      colors: type === 1 ? allVariants.colors : [],
+      sizes: type === 2 ? allVariants.sizes : [],
+      materials: type === 3 ? allVariants.materials : [],
+    };
+
+    const variants = productVariants.filter(variant => {
+      if (type === 1) {
+        return variant.color === value;
+      }
+
+      if (type === 2) {
+        return variant.size === value;
+      }
+
+      if (type === 3) {
+        return variant.material === value;
+      }
+
+      return false;
+    });
+
+    variants.forEach(variant => {
+      if (type === 1) {
+        variantsType.sizes.push(variant.size);
+        variantsType.materials.push(variant.material);
+      } else if (type === 2) {
+        variantsType.colors.push(variant.color);
+        variantsType.materials.push(variant.material);
+      } else if (type === 3) {
+        variantsType.colors.push(variant.color);
+        variantsType.sizes.push(variant.size);
+      }
+    });
+
+    variantsType.colors = uniq(variantsType.colors);
+    variantsType.sizes = uniq(variantsType.sizes);
+    variantsType.materials = uniq(variantsType.materials);
+
+    setSelectedProductColor(
+      type !== 1
+        ? variantsType.colors[0]
+          ? variantsType.colors[0]
+          : ""
+        : selectedProductColor
+    );
+    setSelectedProductSize(
+      type !== 2 ? variantsType.sizes[0] : selectedProductSize
+    );
+    setSelectedProductMaterial(
+      type !== 3 ? variantsType.materials[0] : selectedProductMaterial
+    );
+
+    setProductVariant(variantsType);
+  };
 
   return (
     <div className="product-details-content ml-70">
@@ -65,29 +161,45 @@ const ProductDescriptionInfo = ({
         <p dangerouslySetInnerHTML={{ __html: shortDescription }}></p>
       </div>
 
-      {product.variation ? (
-        <div className="pro-details-size-color">
+      <div className="pro-details-size-color">
+        {productVariant.colors.length > 0 && (
           <div className="pro-details-color-wrap">
             <span>Color</span>
             <div className="pro-details-color-content">
-              {product.variation.map((single, key) => {
+              {productVariant.colors.map((single, key) => {
+                let style;
+
+                if (single.indexOf("#") >= 0) {
+                  style = { background: single };
+                } else if (single.indexOf("http") >= 0) {
+                  style = {
+                    backgroundImage: `url(${single})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "contain",
+                  };
+                }
+
                 return (
                   <label
-                    className={`pro-details-color-content--single ${single.color}`}
+                    className={`pro-details-color-content--single ${single}`}
                     key={key}
+                    style={style}
                   >
                     <input
                       type="radio"
-                      value={single.color}
+                      value={single}
                       name="product-color"
                       checked={
-                        single.color === selectedProductColor ? "checked" : ""
+                        productVariant.colors.length === 1 ||
+                        single === selectedProductColor
+                          ? "checked"
+                          : ""
                       }
                       onChange={() => {
-                        setSelectedProductColor(single.color);
-                        setSelectedProductSize(single.size[0].name);
-                        setProductStock(single.size[0].stock);
+                        filterByType(1, single);
                         setQuantityCount(1);
+
+                        setSelectedProductColor(single);
                       }}
                     />
                     <span className="checkmark"></span>
@@ -96,44 +208,77 @@ const ProductDescriptionInfo = ({
               })}
             </div>
           </div>
+        )}
+
+        {productVariant.sizes.length > 0 && (
           <div className="pro-details-size">
             <span>Size</span>
             <div className="pro-details-size-content">
-              {product.variation &&
-                product.variation.map(single => {
-                  return single.color === selectedProductColor
-                    ? single.size.map((singleSize, key) => {
-                        return (
-                          <label
-                            className={`pro-details-size-content--single`}
-                            key={key}
-                          >
-                            <input
-                              type="radio"
-                              value={singleSize.name}
-                              checked={
-                                singleSize.name === selectedProductSize
-                                  ? "checked"
-                                  : ""
-                              }
-                              onChange={() => {
-                                setSelectedProductSize(singleSize.name);
-                                setProductStock(singleSize.stock);
-                                setQuantityCount(1);
-                              }}
-                            />
-                            <span className="size-name">{singleSize.name}</span>
-                          </label>
-                        );
-                      })
-                    : "";
-                })}
+              {productVariant.sizes.map((single, key) => {
+                return (
+                  <label
+                    className={`pro-details-size-content--single`}
+                    key={key}
+                  >
+                    <input
+                      type="radio"
+                      value={single}
+                      checked={
+                        productVariant.sizes.length === 1 ||
+                        single === selectedProductSize
+                          ? "checked"
+                          : ""
+                      }
+                      onChange={() => {
+                        filterByType(2, single);
+                        setQuantityCount(1);
+
+                        setSelectedProductSize(single);
+                      }}
+                    />
+                    <span className="size-name">{single}</span>
+                  </label>
+                );
+              })}
             </div>
           </div>
-        </div>
-      ) : (
-        ""
-      )}
+        )}
+
+        {productVariant.materials.length > 0 && (
+          <div className="pro-details-size">
+            <span>Material</span>
+            <div className="pro-details-size-content">
+              {productVariant.materials.map((single, key) => {
+                return (
+                  <label
+                    className={`pro-details-size-content--single`}
+                    key={key}
+                  >
+                    <input
+                      type="radio"
+                      value={single}
+                      checked={
+                        productVariant.materials.length === 1 ||
+                        single === selectedProductMaterial
+                          ? "checked"
+                          : ""
+                      }
+                      onChange={() => {
+                        filterByType(3, single);
+                        setQuantityCount(1);
+
+                        setSelectedProductMaterial(single);
+                      }}
+                    />
+                    <span className="size-name">{single}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+
       <div className="pro-details-quality">
         <div className="cart-plus-minus">
           <button
@@ -153,9 +298,7 @@ const ProductDescriptionInfo = ({
           <button
             onClick={() =>
               setQuantityCount(
-                quantityCount < productStock - productCartQty
-                  ? quantityCount + 1
-                  : quantityCount
+                quantityCount < 5 ? quantityCount + 1 : quantityCount
               )
             }
             className="inc qtybutton"
@@ -164,25 +307,26 @@ const ProductDescriptionInfo = ({
           </button>
         </div>
         <div className="pro-details-cart btn-hover">
-          {availableForSale ? (
+          {product.availableForSale ? (
             <button
-              onClick={() =>
+              onClick={() => {
                 addToCart(
                   product,
                   addToast,
                   quantityCount,
                   selectedProductColor,
                   selectedProductSize,
+                  selectedProductMaterial,
                   images
-                )
-              }
-              disabled={productCartQty >= productStock}
+                );
+              }}
+              disabled={!product.availableForSale}
             >
               {" "}
               Add To Cart{" "}
             </button>
           ) : (
-            <button disabled>Out of Stock</button>
+            <button disabled>Out of stock </button>
           )}
         </div>
       </div>
@@ -232,6 +376,7 @@ const mapDispatchToProps = dispatch => {
       quantityCount,
       selectedProductColor,
       selectedProductSize,
+      selectedProductMaterial,
       images
     ) => {
       dispatch(
@@ -241,6 +386,7 @@ const mapDispatchToProps = dispatch => {
           quantityCount,
           selectedProductColor,
           selectedProductSize,
+          selectedProductMaterial,
           images
         )
       );
