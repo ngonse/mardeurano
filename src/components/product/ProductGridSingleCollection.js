@@ -20,6 +20,8 @@ const ProductGridSingleCollection = ({
   sliderClassName,
   spaceBottomClass,
 }) => {
+  console.log(product);
+
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
 
@@ -44,7 +46,7 @@ const ProductGridSingleCollection = ({
           }`}
         >
           <div className="product-img">
-            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <Link to={`/${product.handle}`}>
               <img className="default-img" src={image} alt="" />
             </Link>
             {product.discount || product.new ? (
@@ -64,11 +66,7 @@ const ProductGridSingleCollection = ({
               <div className="product-content-3">
                 <div className="product-title">
                   <h3>
-                    <Link
-                      to={process.env.PUBLIC_URL + "/product/" + product.id}
-                    >
-                      {product.name}
-                    </Link>
+                    <Link to={`/${product.handle}`}>{product.name}</Link>
                   </h3>
                 </div>
                 <div className="price-3">
