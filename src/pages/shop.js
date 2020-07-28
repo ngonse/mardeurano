@@ -11,7 +11,6 @@ import get from "lodash/get";
 import rootReducer from "../redux/reducers/rootReducer";
 
 import { fetchProducts } from "../redux/actions/productActions";
-import { createShopifyClient } from "../redux/actions/shopifyCheckoutAction";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopApp from "../components/ShopApp";
@@ -35,7 +34,6 @@ const Shop = ({ data }) => {
   }
 
   store.dispatch(fetchProducts(products));
-  //   store.dispatch(createShopifyClient());
 
   return (
     <Provider store={store}>

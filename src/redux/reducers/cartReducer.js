@@ -1,3 +1,5 @@
+import uuid from "uuid/v4";
+
 import {
   ADD_TO_CART,
   DECREASE_QUANTITY,
@@ -12,8 +14,6 @@ const cartReducer = (state = initState, action) => {
     product = action.payload;
 
   if (action.type === ADD_TO_CART) {
-    console.log(product.selectedProductSize);
-
     if (product.variants === undefined) {
       const cartItem = cartItems.filter(
         item => item.shopifyId === product.shopifyId
@@ -25,6 +25,7 @@ const cartReducer = (state = initState, action) => {
             ...product,
             quantity: product.quantity ? product.quantity : 1,
             cartItemId: product.shopifyId,
+            uuid: uuid(),
           },
         ];
       } else {
@@ -54,14 +55,13 @@ const cartReducer = (state = initState, action) => {
       })[0];
 
       if (cartItem === undefined) {
-        console.log("cartItem === undefined", cartItem);
-
         return [
           ...cartItems,
           {
             ...product,
             quantity: product.quantity ? product.quantity : 1,
             cartItemId: product.shopifyId,
+            uuid: uuid(),
           },
         ];
       } else if (
@@ -81,8 +81,6 @@ const cartReducer = (state = initState, action) => {
           },
         ];
       } else {
-        console.log("ultimo", cartItem);
-
         return cartItems.map(item =>
           item.shopifyId === cartItem.shopifyId &&
           cartItem.selectedProductColor === item.selectedProductColor &&
@@ -121,7 +119,7 @@ const cartReducer = (state = initState, action) => {
 
   if (action.type === DELETE_FROM_CART) {
     const remainingItems = (cartItems, product) =>
-      cartItems.filter(cartItem => cartItem.cartItemId !== product.cartItemId);
+      cartItems.filter(cartItem => cartItem.uuid !== product.uuid);
     return remainingItems(cartItems, product);
   }
 
