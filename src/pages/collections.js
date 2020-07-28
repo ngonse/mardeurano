@@ -17,7 +17,7 @@ import ShopLayout from "../components/layouts/ShopLayout";
 import CollectionsApp from "../components/CollectionsApp";
 
 const Collections = ({ data }) => {
-  const collections = get(data, "allShopifyCollection.nodes");
+  //   const collections = get(data, "allShopifyCollection.nodes");
 
   let store;
 
@@ -34,7 +34,7 @@ const Collections = ({ data }) => {
     );
   }
 
-  store.dispatch(fetchCollections(collections));
+  store.dispatch(fetchCollections([]));
 
   return (
     <Provider store={store}>
@@ -47,58 +47,58 @@ const Collections = ({ data }) => {
   );
 };
 
-export const query = graphql`
-  query Collections {
-    allShopifyCollection(sort: { fields: [title] }) {
-      nodes {
-        id
-        title
-        handle
-        products {
-          title
-          shopifyId
-          handle
-          description
-          availableForSale
-          priceRange {
-            maxVariantPrice {
-              amount
-            }
-            minVariantPrice {
-              amount
-            }
-          }
-          variants {
-            shopifyId
-            availableForSale
-            title
-            selectedOptions {
-              name
-              value
-            }
-          }
-          images {
-            localFile {
-              childImageSharp {
-                fixed(width: 600, height: 800) {
-                  src
-                }
-              }
-            }
-          }
-        }
-        image {
-          localFile {
-            childImageSharp {
-              fixed(width: 600, height: 800) {
-                src
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// export const query = graphql`
+//   query Collections {
+//     allShopifyCollection(sort: { fields: [title] }) {
+//       nodes {
+//         id
+//         title
+//         handle
+//         products {
+//           title
+//           shopifyId
+//           handle
+//           description
+//           availableForSale
+//           priceRange {
+//             maxVariantPrice {
+//               amount
+//             }
+//             minVariantPrice {
+//               amount
+//             }
+//           }
+//           variants {
+//             shopifyId
+//             availableForSale
+//             title
+//             selectedOptions {
+//               name
+//               value
+//             }
+//           }
+//           images {
+//             localFile {
+//               childImageSharp {
+//                 fixed(width: 600, height: 800) {
+//                   src
+//                 }
+//               }
+//             }
+//           }
+//         }
+//         image {
+//           localFile {
+//             childImageSharp {
+//               fixed(width: 600, height: 800) {
+//                 src
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export default Collections;
