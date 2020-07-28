@@ -1,7 +1,7 @@
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(`
     query AllProducts {
-      allShopifyProduct {
+      allShopifyProduct(filter: { availableForSale: { eq: true } }) {
         nodes {
           handle
         }
