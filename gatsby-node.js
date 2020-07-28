@@ -1,6 +1,3 @@
-const kebabCase = require("lodash/kebabCase");
-const moment = require("moment");
-
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(`
     query AllProducts {
