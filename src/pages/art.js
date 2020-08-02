@@ -17,7 +17,7 @@ import MarDeUranoApp from "../components/MarDeUranoApp";
 const Art = ({ data }) => {
   let store;
 
-  if (window !== undefined) {
+  if (typeof window !== `undefined`) {
     store = createStore(
       rootReducer,
       load(),

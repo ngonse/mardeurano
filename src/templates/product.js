@@ -4,9 +4,9 @@ import { graphql } from "gatsby";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { save, load } from "redux-localstorage-simple";
 import { composeWithDevTools } from "redux-devtools-extension";
 import get from "lodash/get";
+import { save, load } from "redux-localstorage-simple";
 
 import rootReducer from "../redux/reducers/rootReducer";
 
@@ -20,7 +20,7 @@ const Shop = ({ data }) => {
 
   let store;
 
-  if (window !== undefined) {
+  if (typeof window !== `undefined`) {
     store = createStore(
       rootReducer,
       load(),

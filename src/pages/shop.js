@@ -20,7 +20,7 @@ const Shop = ({ data }) => {
 
   let store;
 
-  if (window !== undefined) {
+  if (typeof window !== `undefined`) {
     store = createStore(
       rootReducer,
       load(),

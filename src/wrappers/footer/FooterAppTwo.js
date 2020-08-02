@@ -18,9 +18,13 @@ const FooterAppTwo = ({
 
   useEffect(() => {
     setTop(100);
-    window.addEventListener("scroll", handleScroll);
+    if (typeof window !== `undefined`) {
+      window.addEventListener("scroll", handleScroll);
+    }
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (typeof window !== `undefined`) {
+        window.removeEventListener("scroll", handleScroll);
+      }
     };
   }, []);
 
@@ -29,7 +33,9 @@ const FooterAppTwo = ({
   };
 
   const handleScroll = () => {
-    setScroll(window.scrollY);
+    if (typeof window !== `undefined`) {
+      setScroll(window.scrollY);
+    }
   };
   return (
     <footer

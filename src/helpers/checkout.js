@@ -71,5 +71,7 @@ const addLinesToCheckout = (client, checkoutId, lineItems) => {
 };
 
 const goToCheckout = checkout => {
-  window.open(checkout.webUrl);
+  if (typeof window !== `undefined`) {
+    window.open(checkout.webUrl);
+  }
 };

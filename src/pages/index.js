@@ -18,7 +18,7 @@ import HeaderApp from "../wrappers/header/HeaderApp";
 const Home = ({ data }) => {
   let store;
 
-  if (window !== undefined) {
+  if (typeof window !== `undefined`) {
     store = createStore(
       rootReducer,
       load(),

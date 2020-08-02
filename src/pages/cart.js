@@ -16,7 +16,7 @@ import Cart from "../components/Cart";
 const CartPage = () => {
   let store;
 
-  if (window !== undefined) {
+  if (typeof window !== `undefined`) {
     store = createStore(
       rootReducer,
       load(),

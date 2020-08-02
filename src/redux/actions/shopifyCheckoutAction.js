@@ -6,8 +6,6 @@ export const UPDATE_CHECKOUT = "UPDATE_CHECKOUT";
 
 export const ADD_TO_CHECKOUT = "ADD_TO_CHECKOUT";
 
-const isBrowser = typeof window !== "undefined";
-
 const createShopifyClientSuccess = client => ({
   type: INITIAL_CLIENT,
   payload: client,

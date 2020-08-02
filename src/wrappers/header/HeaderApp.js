@@ -21,16 +21,20 @@ const HeaderApp = ({
   useEffect(() => {
     const header = document.querySelector(".sticky-bar");
     setHeaderTop(header.offsetTop);
-    window && window.addEventListener("scroll", handleScroll);
+    if (typeof window !== `undefined`) {
+      window && window.addEventListener("scroll", handleScroll);
+    }
     return () => {
-      if (window) {
+      if (typeof window !== `undefined`) {
         window.removeEventListener("scroll", handleScroll);
       }
     };
   }, []);
 
   const handleScroll = () => {
-    setScroll(window.scrollY);
+    if (typeof window !== `undefined`) {
+      setScroll(window.scrollY);
+    }
   };
 
   return (
