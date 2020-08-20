@@ -76,10 +76,11 @@ const Home = ({ data }) => {
 
                   return (
                     <div
+                      key={key}
                       className="section-background-image"
                       style={{ backgroundImage: `url(${banner})` }}
                     >
-                      <Section key={key}>
+                      <Section>
                         <div className="slider-section flone-fp-section">
                           <div className="container">
                             <div className="row fullpage-slider-wrap-mrg">

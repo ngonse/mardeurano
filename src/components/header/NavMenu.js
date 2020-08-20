@@ -3,7 +3,9 @@ import React from "react";
 import { Link } from "gatsby";
 import { multilanguage } from "redux-multilanguage";
 
-const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
+import NavMenuItem from "./sub-components/NavMenuItem";
+
+const NavMenu = ({ strings, menuWhiteClass, sidebarMenu, menuOptions }) => {
   return (
     <div
       className={` ${
@@ -14,18 +16,14 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
     >
       <nav>
         <ul>
-          <li>
-            <Link to={"/shop"}>{strings["shop"]}</Link>
-          </li>
-          <li>
-            <Link to={"/collections"}>{strings["collections"]}</Link>
-          </li>
-          <li>
-            <Link to={"/our-world"}>{strings["our-world"]}</Link>
-          </li>
-          <li>
-            <Link to={"/sale"}>{strings["sale"]}</Link>
-          </li>
+          {menuOptions &&
+            menuOptions.map((item) => (
+              <NavMenuItem
+                key={item.id}
+                item={item}
+                sidebarMenu={sidebarMenu}
+              ></NavMenuItem>
+            ))}
         </ul>
       </nav>
     </div>

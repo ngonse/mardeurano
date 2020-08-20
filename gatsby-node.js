@@ -17,7 +17,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic("No data");
   }
 
-  result.data.allShopifyProduct.nodes.forEach(productItem => {
+  result.data.allShopifyProduct.nodes.forEach((productItem) => {
     actions.createPage({
       path: productItem.handle,
       component: require.resolve("./src/templates/product.js"),

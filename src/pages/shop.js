@@ -15,8 +15,11 @@ import { fetchProducts } from "../redux/actions/productActions";
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopApp from "../components/ShopApp";
 
-const Shop = ({ data }) => {
-  const products = get(data, "allShopifyProduct.nodes");
+const Shop = ({ data, location }) => {
+  //   console.log({ location });
+  //   const { data } = props;
+
+  let products = get(data, "allShopifyProduct.nodes");
 
   let store;
 
@@ -30,6 +33,14 @@ const Shop = ({ data }) => {
     store = createStore(
       rootReducer,
       composeWithDevTools(applyMiddleware(thunk))
+    );
+  }
+
+  if (location.search !== "") {
+    const searchQuery = location.search.substring(1, location.search.length);
+
+    products = products.filter((product) =>
+      product.tags.some((tag) => tag === searchQuery)
     );
   }
 
@@ -55,6 +66,7 @@ export const query = graphql`
         description
         handle
         publishedAt
+        tags
         priceRange {
           minVariantPrice {
             currencyCode

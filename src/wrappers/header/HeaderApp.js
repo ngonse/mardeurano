@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
+import { graphql, useStaticQuery } from "gatsby";
 
 import Logo from "../../components/header/Logo";
 import NavMenu from "../../components/header/NavMenu";
@@ -37,6 +38,32 @@ const HeaderApp = ({
     }
   };
 
+  const menuQuery = useStaticQuery(graphql`
+    query Menu {
+      allContentfulMenu(
+        filter: { visible: { eq: true }, isTop: { eq: true } }
+        sort: { fields: order, order: ASC }
+      ) {
+        nodes {
+          id
+          title
+          menuLink
+          menuChild {
+            id
+            title
+            menuLink
+            order
+            subMenu {
+              id
+              title
+              url
+            }
+          }
+        }
+      }
+    }
+  `);
+
   return (
     <header
       className={`header-area clearfix ${headerBgClass ? headerBgClass : ""}`}
@@ -54,14 +81,14 @@ const HeaderApp = ({
               <Logo imageUrl={logo} logoClass="logo" />
             </div>
             <div className="col-xl-8 col-lg-8 d-none d-lg-block">
-              <NavMenu />
+              <NavMenu menuOptions={menuQuery.allContentfulMenu.nodes} />
             </div>
             <div className="col-xl-2 col-lg-2 col-md-6 col-8">
               <IconGroup />
             </div>
           </div>
         </div>
-        <MobileMenu />
+        <MobileMenu menuOptions={menuQuery.allContentfulMenu.nodes} />
       </div>
     </header>
   );

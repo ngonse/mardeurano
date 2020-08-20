@@ -28,7 +28,7 @@ const ProductGridListSingle = ({
   const images = get(product, "images");
   const imagesArray = [];
 
-  images.forEach(imgProduct => {
+  images.forEach((imgProduct) => {
     const imagen = get(imgProduct, "localFile.childImageSharp.fixed");
     if (imagen) {
       imagesArray.push(imagen);
@@ -114,6 +114,8 @@ const ProductGridListSingle = ({
             <h3>
               <Link to={url}>{product.title}</Link>
             </h3>
+            {/* <pre>{JSON.stringify(product.tags, null, 2)}</pre> */}
+
             <div className="product-price">
               <span>{currency + " " + finalProductPrice.toFixed(2)} </span>
             </div>

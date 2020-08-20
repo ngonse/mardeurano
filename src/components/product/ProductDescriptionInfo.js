@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import get from "lodash/get";
@@ -33,7 +33,7 @@ const ProductDescriptionInfo = ({
   };
 
   product.variants.forEach((variant, index) => {
-    variant.selectedOptions.forEach(option => {
+    variant.selectedOptions.forEach((option) => {
       switch (option.name) {
         case "Size":
           variants.sizes.push(option.value);
@@ -57,7 +57,7 @@ const ProductDescriptionInfo = ({
   variants.sizes = uniq(variants.sizes);
   variants.materials = uniq(variants.materials);
 
-  const allVariants = variants;
+  const allVariants = { ...variants };
 
   const [productVariant, setProductVariant] = useState(variants);
   const [productVariants, setProductVariants] = useState(product.variants);
@@ -89,12 +89,17 @@ const ProductDescriptionInfo = ({
     // 3 = material
 
     const variantsType = {
-      colors: type === 1 ? allVariants.colors : [],
-      sizes: type === 2 ? allVariants.sizes : [],
-      materials: type === 3 ? allVariants.materials : [],
+      colors:
+        type === 1 && allVariants.colors.length > 0 ? allVariants.colors : [],
+      sizes:
+        type === 2 && allVariants.sizes.length > 0 ? allVariants.sizes : [],
+      materials:
+        type === 3 && allVariants.materials.length > 0
+          ? allVariants.materials
+          : [],
     };
 
-    const variants = productVariants.filter(variant => {
+    const variantes = productVariants.filter((variant) => {
       if (type === 1) {
         return variant.color === value;
       }
@@ -110,16 +115,31 @@ const ProductDescriptionInfo = ({
       return false;
     });
 
-    variants.forEach(variant => {
+    variantes.forEach((variant) => {
       if (type === 1) {
-        variantsType.sizes.push(variant.size);
-        variantsType.materials.push(variant.material);
+        if (variant.size !== undefined) {
+          variantsType.sizes.push(variant.size);
+        }
+
+        if (variant.material !== undefined) {
+          variantsType.materials.push(variant.material);
+        }
       } else if (type === 2) {
-        variantsType.colors.push(variant.color);
-        variantsType.materials.push(variant.material);
+        if (variant.color !== undefined) {
+          variantsType.colors.push(variant.color);
+        }
+
+        if (variant.material !== undefined) {
+          variantsType.materials.push(variant.material);
+        }
       } else if (type === 3) {
-        variantsType.colors.push(variant.color);
-        variantsType.sizes.push(variant.size);
+        if (variant.color !== undefined) {
+          variantsType.colors.push(variant.color);
+        }
+
+        if (variant.size !== undefined) {
+          variantsType.sizes.push(variant.size);
+        }
       }
     });
 
@@ -135,14 +155,36 @@ const ProductDescriptionInfo = ({
         : selectedProductColor
     );
     setSelectedProductSize(
-      type !== 2 ? variantsType.sizes[0] : selectedProductSize
+      type !== 2
+        ? variantsType.sizes[0]
+          ? variantsType.sizes[0]
+          : ""
+        : selectedProductSize
     );
     setSelectedProductMaterial(
-      type !== 3 ? variantsType.materials[0] : selectedProductMaterial
+      type !== 3
+        ? variantsType.materials[0]
+          ? variantsType.materials[0]
+          : ""
+        : selectedProductMaterial
     );
 
     setProductVariant(variantsType);
   };
+
+  useEffect(() => {
+    if (productVariant !== null) {
+      setSelectedProductColor(
+        productVariant.colors[0] ? productVariant.colors[0] : null
+      );
+      setSelectedProductSize(
+        productVariant.sizes[0] ? productVariant.sizes[0] : null
+      );
+      setSelectedProductMaterial(
+        productVariant.materials[0] ? productVariant.materials[0] : null
+      );
+    }
+  }, [productVariant]);
 
   return (
     <div className="product-details-content ml-70">
@@ -368,7 +410,7 @@ ProductDescriptionInfo.propTypes = {
   wishlistItem: PropTypes.object,
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (
       item,

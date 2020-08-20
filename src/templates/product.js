@@ -52,6 +52,7 @@ export const query = graphql`
       descriptionHtml
       handle
       publishedAt
+      tags
       priceRange {
         minVariantPrice {
           currencyCode

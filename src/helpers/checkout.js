@@ -7,20 +7,29 @@ const client = Client.buildClient({
 
 const isBrowser = typeof window !== "undefined";
 
-export const handleCheckout = cartData => {
-  let lineItems = cartData.map(item => {
-    console.log(item);
-
-    const variant = item.variants.filter(variante => {
+export const handleCheckout = (cartData) => {
+  let lineItems = cartData.map((item) => {
+    const variant = item.variants.filter((variante) => {
+      //   if (
+      //     item.selectedProductColor !== null &&
+      //     item.selectedProductSize !== null &&
+      //     item.selectedProductMaterial !== null
+      //   ) {
       return (
-        variante.color === item.selectedProductColor &&
-        variante.size === item.selectedProductSize &&
-        variante.material === item.selectedProductMaterial
+        (item.selectedProductColor === null ||
+          variante.color === item.selectedProductColor) &&
+        (item.selectedProductSize === null ||
+          variante.size === item.selectedProductSize) &&
+        (item.selectedProductMaterial === null ||
+          variante.material === item.selectedProductMaterial)
       );
+      //   }
+
+      //   return true;
     });
 
     return {
-      variantId: variant[0].shopifyId,
+      variantId: variant[0] ? variant[0].shopifyId : 0,
       quantity: item.quantity,
     };
   });
@@ -32,23 +41,23 @@ export const handleCheckout = cartData => {
   const createNewCheckout = () =>
     client.checkout
       .create()
-      .then(checkout => {
+      .then((checkout) => {
         localStorage.setItem("shopify_checkout_id", checkout.id);
-        return addLinesToCheckout(client, checkout.id, lineItems);
+        return addLinesToCheckout(checkout.id, lineItems);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
 
-  const fetchCheckout = id =>
+  const fetchCheckout = (id) =>
     client.checkout
       .fetch(id)
-      .then(checkout => {
-        const lineItemsToRemove = checkout.lineItems.map(item => item.id);
+      .then((checkout) => {
+        const lineItemsToRemove = checkout.lineItems.map((item) => item.id);
 
         return client.checkout
           .removeLineItems(id, lineItemsToRemove)
-          .then(checkout => addLinesToCheckout(client, checkout.id, lineItems));
+          .then((checkoutRes) => addLinesToCheckout(checkoutRes.id, lineItems));
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
 
   if (existingCheckoutID) {
     try {
@@ -61,17 +70,17 @@ export const handleCheckout = cartData => {
   }
 };
 
-const addLinesToCheckout = (client, checkoutId, lineItems) => {
+const addLinesToCheckout = (checkoutId, lineItems) => {
   client.checkout
     .addLineItems(checkoutId, lineItems)
-    .then(checkout => {
+    .then((checkout) => {
       goToCheckout(checkout);
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-const goToCheckout = checkout => {
+const goToCheckout = (checkout) => {
   if (typeof window !== `undefined`) {
-    window.open(checkout.webUrl);
+    window.open(checkout.webUrl, "_self");
   }
 };
