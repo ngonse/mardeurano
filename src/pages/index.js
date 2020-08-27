@@ -1,155 +1,159 @@
-import React, { Fragment } from "react";
-import { graphql } from "gatsby";
-import { SectionsContainer, Section, Header } from "react-fullpage";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { save, load } from "redux-localstorage-simple";
-import { composeWithDevTools } from "redux-devtools-extension";
-import get from "lodash/get";
+import React, { useState } from "react";
+import { Link } from "gatsby";
+import { Modal } from "react-bootstrap";
 
-import "../assets/scss/style.scss";
+import "../assets/scss/mardeurano.scss";
 
-import rootReducer from "../redux/reducers/rootReducer";
+export default function Index() {
+  const [show, setShow] = useState(false);
 
-import MarDeUranoApp from "../components/MarDeUranoApp";
-import HeaderApp from "../wrappers/header/HeaderApp";
+  const handleClose = () => setShow(false);
 
-const Home = ({ data }) => {
-  let store;
+  const handleOnClick = (e) => {
+    e.preventDefault();
 
-  if (typeof window !== `undefined`) {
-    store = createStore(
-      rootReducer,
-      load(),
-      composeWithDevTools(applyMiddleware(thunk, save()))
-    );
-  } else {
-    store = createStore(
-      rootReducer,
-      composeWithDevTools(applyMiddleware(thunk))
-    );
-  }
+    setShow(true);
 
-  const anchors = [];
-
-  const sliderData = get(data, "allContentfulHomeSlider.nodes");
-
-  sliderData.forEach(element => {
-    anchors.push(element.slug);
-  });
-
-  const logoHeader = get(data, "contentfulInformacionDelSitio.logo.fixed.src");
-
-  const options = {
-    activeClass: "active",
-    anchors: anchors,
-    arrowNavigation: false,
-    className: "SectionsContainer",
-    sectionClassName: "Section",
-    delay: 1000,
-    navigation: true,
-    scrollBar: false,
-    sectionPaddingTop: "0",
-    sectionPaddingBottom: "0",
-    verticalAlign: true,
+    console.log(e);
   };
 
   return (
-    <Provider store={store}>
-      <MarDeUranoApp>
-        <Fragment>
-          <div className="fullpage-slider-wrapper">
-            <Header>
-              <HeaderApp
-                logo={logoHeader}
-                layout="container-fluid"
-                headerPaddingClass="header-padding-1"
-                headerBgClass="bg-white"
-              />
-            </Header>
-            <SectionsContainer {...options} className="bg-gray-7">
-              {sliderData &&
-                sliderData.length > 0 &&
-                sliderData.map((single, key) => {
-                  const banner = get(single, "banner.fixed.src");
+    <div className="index">
+      <div className="link">
+        <Link to="/home">
+          <img src="images/Shop.png" alt="" />
+        </Link>
+      </div>
 
-                  return (
-                    <div
-                      key={key}
-                      className="section-background-image"
-                      style={{ backgroundImage: `url(${banner})` }}
-                    >
-                      <Section>
-                        <div className="slider-section flone-fp-section">
-                          <div className="container">
-                            <div className="row fullpage-slider-wrap-mrg">
-                              <div className="col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
-                                <div className="slider-content-11 slider-animated-1 fullpage-slider-mrg fullpage-content">
-                                  <h3 className="animated text-white">
-                                    {single.title}
-                                  </h3>
-                                  <h1
-                                    className="animated text-white"
-                                    dangerouslySetInnerHTML={{
-                                      __html: single.subtitle,
-                                    }}
-                                  />
-                                  <div className="slider-btn-11 btn-hover border-white">
-                                    <a className="animated " href={single.url}>
-                                      {single.textoBotn}
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </Section>
-                    </div>
-                  );
-                })}
-            </SectionsContainer>
+      <div className="DIVGuacamaya">
+        <a
+          href="/"
+          data-toggle="modal"
+          data-target="#Guacamaya"
+          onClick={handleOnClick}
+        >
+          <img
+            className="Guacamaya"
+            src={require("../assets/images/Guacamaya.gif")}
+            alt="Guacamaya"
+          />
+        </a>
+      </div>
+
+      <div className="Diamante1">
+        <a
+          href="/"
+          data-toggle="modal"
+          data-target="#Diamante1"
+          onClick={handleOnClick}
+        >
+          <img
+            className="diamante1"
+            src={require("../assets/images/cristaleslluvia01.png")}
+            alt=""
+          />
+        </a>
+      </div>
+
+      <div className="Diamante2">
+        <a
+          href="/"
+          data-toggle="modal"
+          data-target="#Diamante2"
+          onClick={handleOnClick}
+        >
+          <img
+            className="diamante2"
+            src={require("../assets/images/cristaleslluvia02.png")}
+            alt=""
+          />
+        </a>
+      </div>
+      <div className="Diamante3">
+        <a
+          href="/"
+          data-toggle="modal"
+          data-target="#Diamante3"
+          onClick={handleOnClick}
+        >
+          <img
+            className="diamante3"
+            src={require("../assets/images/cristaleslluvia03.png")}
+            alt=""
+          />
+        </a>
+      </div>
+      <div className="Diamante4">
+        <a
+          href="/"
+          data-toggle="modal"
+          data-target="#Diamante4"
+          onClick={handleOnClick}
+        >
+          <img
+            className="diamante4"
+            src={require("../assets/images/cristaleslluvia04.png")}
+            alt=""
+          />
+        </a>
+      </div>
+
+      <div className="Diamante5">
+        <a
+          href="/"
+          data-toggle="modal"
+          data-target="#Diamante5"
+          onClick={handleOnClick}
+        >
+          <img
+            className="diamante5"
+            src={require("../assets/images/cristaleslluvia05.png")}
+            alt=""
+          />
+        </a>
+      </div>
+
+      <div className="contentBosque">
+        <img
+          className="bosque"
+          src={require("../assets/images/bosque.png")}
+          alt=""
+        />
+      </div>
+
+      <div className="contentOlas">
+        <img className="olas" src="images/olas.gif" alt="" />
+      </div>
+      <img
+        className="splash1"
+        src={require("../assets/images/Splash_GIF.gif")}
+        alt=""
+      />
+      <img
+        className="splash2"
+        src={require("../assets/images/Splash_GIF.gif")}
+        alt=""
+      />
+
+      <div className="contentTiburcio">
+        <img
+          className="tiburcio"
+          src={require("../assets/images/tiburcio.png")}
+          alt=""
+        />
+      </div>
+
+      <Modal show={show} onHide={handleClose} size="sm">
+        <Modal.Header closeButton>
+          <div className="title justify-content-center">
+            <h5 className="modal-title">Titulo CRISTAL</h5>
           </div>
-        </Fragment>
-      </MarDeUranoApp>
-    </Provider>
+        </Modal.Header>
+        <Modal.Body>Hola Mundo</Modal.Body>
+        <div className="modal-footer bg-dark text-white justify-content-center">
+          <p>LAS GUACAMAYAS</p>
+        </div>
+      </Modal>
+    </div>
   );
-};
-
-export const query = graphql`
-  query HomeSlider {
-    allContentfulHomeSlider(sort: { order: DESC, fields: createdAt }) {
-      nodes {
-        id
-        title
-        subtitle
-        textoBotn
-        slug
-        url
-        banner {
-          fixed(width: 1600, quality: 100) {
-            src
-          }
-        }
-        image {
-          title
-          fixed(width: 500, height: 540, quality: 100) {
-            src
-          }
-        }
-      }
-    }
-    contentfulInformacionDelSitio {
-      id
-      nombre
-      logo {
-        fixed(width: 150, height: 30, cropFocus: CENTER) {
-          src
-        }
-      }
-    }
-  }
-`;
-
-export default Home;
+}

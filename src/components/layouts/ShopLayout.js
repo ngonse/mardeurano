@@ -6,6 +6,9 @@ import get from "lodash/get";
 import HeaderApp from "../../wrappers/header/HeaderApp";
 import FooterAppOne from "../../wrappers/footer/FooterAppOne";
 
+// import "../assets/scss/style.scss";
+import "../../assets/scss/style.scss";
+
 const ShopLayout = ({
   children,
   headerContainerClass,
@@ -32,7 +35,7 @@ const ShopLayout = ({
           }
         }
       `}
-      render={data => {
+      render={(data) => {
         const logoHeader = get(
           data,
           "contentfulInformacionDelSitio.logo.fixed.src"

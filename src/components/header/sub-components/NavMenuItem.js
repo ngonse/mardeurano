@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import { multilanguage } from "redux-multilanguage";
 
-const NavMenuItem = ({ item, sidebarMenu }) => {
+const NavMenuItem = ({ item, sidebarMenu }) => {	
   return item && item.menuChild === null ? (
     <li>
       <Link to={`/${item.menuLink}`}>{item.title}</Link>

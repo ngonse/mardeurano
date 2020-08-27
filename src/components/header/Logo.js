@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 const Logo = ({ imageUrl, logoClass }) => {
   return (
     <div className={`${logoClass ? logoClass : ""}`}>
-      <Link to={"/"}>
+      <Link to={"/home"}>
         <img alt="" src={imageUrl} />
       </Link>
     </div>

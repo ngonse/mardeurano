@@ -87,6 +87,8 @@ function ProductModal(props) {
   const [productVariant, setProductVariant] = useState(variants);
   const [productVariants, setProductVariants] = useState(product.variants);
 
+  const [firstLoad, setFisrtLoad] = useState(true);
+
   useEffect(() => {
     if (
       gallerySwiper !== null &&
@@ -98,18 +100,18 @@ function ProductModal(props) {
       thumbnailSwiper.controller.control = gallerySwiper;
     }
 
-    if (productVariant !== null) {
+    if (firstLoad && productVariant !== null) {
       setSelectedProductColor(
-        productVariant.colors[0] ? productVariant.colors[0] : null
+        productVariant.colors[0] ? productVariant.colors[0] : ""
       );
       setSelectedProductSize(
-        productVariant.sizes[0] ? productVariant.sizes[0] : null
+        productVariant.sizes[0] ? productVariant.sizes[0] : ""
       );
       setSelectedProductMaterial(
-        productVariant.materials[0] ? productVariant.materials[0] : null
+        productVariant.materials[0] ? productVariant.materials[0] : ""
       );
     }
-  }, [gallerySwiper, thumbnailSwiper, productVariant]);
+  }, [gallerySwiper, thumbnailSwiper, productVariant, firstLoad]);
 
   const gallerySwiperParams = {
     getSwiper: getGallerySwiper,
@@ -147,6 +149,8 @@ function ProductModal(props) {
     // 1 = color
     // 2 = size
     // 3 = material
+
+    console.log({ type, value });
 
     const variantsType = {
       colors:
@@ -206,6 +210,12 @@ function ProductModal(props) {
     variantsType.colors = uniq(variantsType.colors);
     variantsType.sizes = uniq(variantsType.sizes);
     variantsType.materials = uniq(variantsType.materials);
+
+    console.log({
+      selectedProductColor,
+      selectedProductSize,
+      selectedProductMaterial,
+    });
 
     setSelectedProductColor(
       type !== 1
@@ -335,6 +345,7 @@ function ProductModal(props) {
                                     : ""
                                 }
                                 onChange={() => {
+                                  setFisrtLoad(false);
                                   filterByType(1, single);
                                   setQuantityCount(1);
 
@@ -369,6 +380,8 @@ function ProductModal(props) {
                                     : ""
                                 }
                                 onChange={() => {
+                                  console.log("click");
+                                  setFisrtLoad(false);
                                   filterByType(2, single);
                                   setQuantityCount(1);
 
@@ -403,6 +416,7 @@ function ProductModal(props) {
                                     : ""
                                 }
                                 onChange={() => {
+                                  setFisrtLoad(false);
                                   filterByType(3, single);
                                   setQuantityCount(1);
 

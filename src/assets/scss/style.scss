@@ -36,3 +36,18 @@
 @import "404";
 
 @import "main";
+
+.tabs-faq {
+  .list-group-item {
+    border: none;
+    background: transparent;
+    color: #495057;
+    opacity: 0.6;
+    text-transform: uppercase;
+
+    &.active {
+      color: #000;
+      opacity: 1;
+    }
+  }
+}

@@ -6,12 +6,12 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass }) => {
   return (
     <div>
       <div className="footer-logo">
-        <Link to={"/"}>
+        <Link to={"/home"}>
           <img alt="" src={footerLogo} />
         </Link>
       </div>
       <p>
-        © 2020 <Link to={"/"}>Mar de Urano</Link> All Rights Reserved
+        © 2020 <Link to={"/home"}>Mar de Urano</Link> All Rights Reserved
       </p>
     </div>
   );

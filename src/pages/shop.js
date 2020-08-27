@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { graphql } from "gatsby";
 import { Provider } from "react-redux";
@@ -11,6 +11,8 @@ import get from "lodash/get";
 import rootReducer from "../redux/reducers/rootReducer";
 
 import { fetchProducts } from "../redux/actions/productActions";
+
+import { accentFold } from "../helpers/utils";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopApp from "../components/ShopApp";
@@ -36,12 +38,24 @@ const Shop = ({ data, location }) => {
     );
   }
 
+  let searchText = "";
+
   if (location.search !== "") {
     const searchQuery = location.search.substring(1, location.search.length);
 
     products = products.filter((product) =>
       product.tags.some((tag) => tag === searchQuery)
     );
+  } else if (location.state) {
+    searchText = location.state;
+    if (searchText && searchText.querySearch) {
+      searchText = accentFold(searchText.querySearch).toUpperCase();
+
+      products = products.filter((product) => {
+        const title = accentFold(product.title).toUpperCase();
+        return title.indexOf(searchText) > -1;
+      });
+    }
   }
 
   store.dispatch(fetchProducts(products));

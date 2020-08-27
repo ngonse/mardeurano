@@ -9,7 +9,7 @@ import ShopLayout from "./layouts/ShopLayout";
 import ShopTopbar from "../wrappers/product/ShopTopbar";
 import ShopProducts from "../wrappers/product/ShopProducts";
 
-const ShopApp = props => {
+const ShopApp = (props) => {
   const { products } = props;
 
   const sortType = "";
@@ -25,7 +25,7 @@ const ShopApp = props => {
 
   const pageLimit = 16;
 
-  const getLayout = layout => {
+  const getLayout = (layout) => {
     setLayout(layout);
   };
 
@@ -87,7 +87,7 @@ ShopApp.propTypes = {
   products: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     products: state.productData.products,
   };

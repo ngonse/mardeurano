@@ -172,8 +172,10 @@ const ProductDescriptionInfo = ({
     setProductVariant(variantsType);
   };
 
+  const [firstLoad, setFisrtLoad] = useState(true);
+
   useEffect(() => {
-    if (productVariant !== null) {
+    if (firstLoad && productVariant !== null) {
       setSelectedProductColor(
         productVariant.colors[0] ? productVariant.colors[0] : null
       );
@@ -184,7 +186,7 @@ const ProductDescriptionInfo = ({
         productVariant.materials[0] ? productVariant.materials[0] : null
       );
     }
-  }, [productVariant]);
+  }, [productVariant, firstLoad]);
 
   return (
     <div className="product-details-content ml-70">
@@ -238,6 +240,7 @@ const ProductDescriptionInfo = ({
                           : ""
                       }
                       onChange={() => {
+                        setFisrtLoad(false);
                         filterByType(1, single);
                         setQuantityCount(1);
 
@@ -272,6 +275,7 @@ const ProductDescriptionInfo = ({
                           : ""
                       }
                       onChange={() => {
+                        setFisrtLoad(false);
                         filterByType(2, single);
                         setQuantityCount(1);
 
@@ -306,6 +310,7 @@ const ProductDescriptionInfo = ({
                           : ""
                       }
                       onChange={() => {
+                        setFisrtLoad(false);
                         filterByType(3, single);
                         setQuantityCount(1);
 

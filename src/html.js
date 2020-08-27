@@ -12,10 +12,13 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
 
+        {/* <link rel="stylesheet" href="/mardeurano.css.css" /> */}
+
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
+
         <div
           key={`body`}
           id="___gatsby"
