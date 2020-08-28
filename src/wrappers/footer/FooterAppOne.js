@@ -48,27 +48,18 @@ const FooterAppOne = ({
         spaceBottomClass ? spaceBottomClass : ""
       } ${extraFooterClass ? extraFooterClass : ""}`}
     >
-      {/* <div className={`${containerClass ? containerClass : "container"}`}>
-        <div className="row">
-          <div>
-            <FooterCopyright footerLogo={logoFooter} spaceBottomClass="mb-30" />
-          </div>
-        </div>
-      </div> */}
-
       <div className={`${containerClass ? containerClass : "container"}`}>
         <div className="row">
           <div
             className={`${
-              sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
+              sideMenu ? "col-xl-2 col-sm-4" : "col-lg-3 col-sm-4"
             }`}
           >
-            {/* footer copyright */}
             <FooterCopyright footerLogo={logoFooter} spaceBottomClass="mb-30" />
           </div>
           <div
             className={`${
-              sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
+              sideMenu ? "col-xl-2 col-sm-4" : "col-lg-3 col-sm-4"
             }`}
           >
             <div className="footer-widget mb-30 ml-30">
@@ -95,17 +86,33 @@ const FooterAppOne = ({
                   <li>
                     <Link to={"/faq"}>FAQ'S</Link>
                   </li>
+                  <li className="social-footer">
+                    <a
+                      href="https://www.facebook.com/mardeurano"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mr-3"
+                    >
+                      <i class="fab fa-facebook-square"></i>
+                    </a>
+                    <a
+                      href="https://www.instagram.com/mardeurano_/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <i class="fab fa-instagram-square"></i>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
-
+          <div className="col-lg-1 d-sm-none d-lg-block"></div>
           <div
             className={`${
-              sideMenu ? "col-xl-3 col-sm-8" : "col-lg-4 col-sm-6"
+              sideMenu ? "col-xl-3 col-sm-8" : "col-lg-4 col-sm-4"
             }`}
           >
-            {/* footer newsletter */}
             <FooterNewsletter
               spaceBottomClass="mb-30"
               spaceLeftClass="ml-70"

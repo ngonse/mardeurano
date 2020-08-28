@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "gatsby";
 import { Modal } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 
 import "../assets/scss/mardeurano.scss";
 
 export default function Index() {
   const [show, setShow] = useState(false);
+  const [currentImage, setCurrentImage] = useState("");
 
   const handleClose = () => setShow(false);
 
   const handleOnClick = (e) => {
     e.preventDefault();
+
+    const randomNumber = Math.ceil(1 + Math.random() * (27 - 1));
+
+    const image = require(`../assets/images/landingimages/image-${randomNumber}.jpg`);
+
+    setCurrentImage(image);
 
     setShow(true);
 
@@ -143,16 +151,22 @@ export default function Index() {
         />
       </div>
 
-      <Modal show={show} onHide={handleClose} size="sm">
-        <Modal.Header closeButton>
-          <div className="title justify-content-center">
-            <h5 className="modal-title">Titulo CRISTAL</h5>
-          </div>
-        </Modal.Header>
-        <Modal.Body>Hola Mundo</Modal.Body>
-        <div className="modal-footer bg-dark text-white justify-content-center">
-          <p>LAS GUACAMAYAS</p>
-        </div>
+      <Modal
+        className="modal-landing"
+        show={show}
+        onHide={handleClose}
+        size="sm"
+      >
+        <Modal.Body>
+          {currentImage !== "" && (
+            <div className="container-image">
+              <Image fluid src={currentImage} alt="Mar de Urano" />
+              <button className="btn-close" onClick={handleClose}>
+                X
+              </button>
+            </div>
+          )}
+        </Modal.Body>
       </Modal>
     </div>
   );

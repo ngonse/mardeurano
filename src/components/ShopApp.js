@@ -52,12 +52,12 @@ const ShopApp = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12">
-              <ShopTopbar
+              {/* <ShopTopbar
                 getLayout={getLayout}
                 getFilterSortParams={getFilterSortParams}
                 productCount={products.length}
                 sortedProductCount={currentData.length}
-              />
+              /> */}
 
               <ShopProducts layout={layout} products={currentData} />
 
