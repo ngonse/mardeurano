@@ -37,7 +37,7 @@ const OurWorld = ({ data, location }) => {
                 <div className="col-12 col-sm-5">
                   <img
                     className="img-fluid"
-                    src={require("../assets/images/cielo.png")}
+                    src={require("../assets/images/our-world1.jpg")}
                     alt=""
                   />
                 </div>
@@ -118,7 +118,7 @@ const OurWorld = ({ data, location }) => {
                 <div className="col-12 col-sm-6">
                   <img
                     className="img-fluid"
-                    src={require("../assets/images/cielo.png")}
+                    src={require("../assets/images/our-world2.jpg")}
                     alt=""
                   />
                   <h2 className="text-center mt-5">PRODUCTION</h2>
