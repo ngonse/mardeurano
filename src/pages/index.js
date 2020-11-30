@@ -37,7 +37,7 @@ export default function Index() {
       <div className="loader">Loading...</div>
       <img
         width="200"
-        src="http://images.ctfassets.net/ijlmja73rgg8/20NYXvslVeG3fMrkdB8VA/3f4f34345b97c6ed877cacbb274a0c6a/MDU_LOGOS_Mesa_de_trabajo_1.png?w=150&h=30&q=50&fit=fill&f=center"
+        src="https://images.ctfassets.net/ijlmja73rgg8/20NYXvslVeG3fMrkdB8VA/3f4f34345b97c6ed877cacbb274a0c6a/MDU_LOGOS_Mesa_de_trabajo_1.png?w=150&h=30&q=50&fit=fill&f=center"
         alt=""
       />
     </div>
