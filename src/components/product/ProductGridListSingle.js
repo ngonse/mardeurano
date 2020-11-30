@@ -35,6 +35,8 @@ const ProductGridListSingle = ({
     }
   });
 
+  console.log(product);
+
   const finalProductPrice = parseFloat(price);
 
   const availableForSale = get(product, "availableForSale");

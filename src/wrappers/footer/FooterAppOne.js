@@ -93,14 +93,14 @@ const FooterAppOne = ({
                       rel="noreferrer"
                       className="mr-3"
                     >
-                      <i class="fab fa-facebook-square"></i>
+                      <i className="fab fa-facebook-square"></i>
                     </a>
                     <a
                       href="https://www.instagram.com/mardeurano_/"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <i class="fab fa-instagram-square"></i>
+                      <i className="fab fa-instagram-square"></i>
                     </a>
                   </li>
                 </ul>
