@@ -64,7 +64,7 @@ const OurWorld = ({ data, location }) => {
                     world situation related to the fashion industry their design
                     process is textile focused using only recycled, regenerated,
                     and organic fabrics. Every piece is cut with functionality
-                    and quality in minda. Having a shared economy and zero waste
+                    and quality in mind. Having a shared economy and zero waste
                     practices are at their core. Mar De Urano designs for the
                     men and the women that believe in challenging the status quo
                     by their daily actions including the way they dress. They
