@@ -15,15 +15,13 @@ export default function Index() {
   const handleOnClick = (e) => {
     e.preventDefault();
 
-    const randomNumber = Math.ceil(1 + Math.random() * (27 - 1));
+    const randomNumber = Math.ceil(1 + Math.random() * (63 - 1));
 
-    const image = require(`../assets/images/landingimages/image-${randomNumber}.jpg`);
+    const image = require(`../assets/images/landingimages/image-${randomNumber}.png`);
 
     setCurrentImage(image);
 
     setShow(true);
-
-    console.log(e);
   };
 
   useEffect(() => {
