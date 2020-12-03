@@ -43,129 +43,94 @@ export default function Index() {
     </div>
   ) : (
     <div className="index">
-      <div className="link">
-        <Link to="/home">
-          <img src="images/Shop.png" alt="" />
-        </Link>
-      </div>
+      <section className="main-section">
+        <div className="contentBosque">
+          <img
+            className="bosque"
+            src={require("../assets/images/bosque.png")}
+          />
+        </div>
 
-      <div className="DIVGuacamaya">
-        <a
-          href="/"
-          data-toggle="modal"
-          data-target="#Guacamaya"
-          onClick={handleOnClick}
-        >
-          <img
-            className="Guacamaya"
-            src={require("../assets/images/Guacamaya.gif")}
-            alt="Guacamaya"
-          />
-        </a>
-      </div>
+        <div className="link">
+          <Link to="/home">
+            <img src={require("../assets/images/Shop.png")} alt="" />
+          </Link>
+        </div>
 
-      <div className="Diamante1">
-        <a
-          href="/"
-          data-toggle="modal"
-          data-target="#Diamante1"
-          onClick={handleOnClick}
-        >
-          <img
-            className="diamante1"
-            src={require("../assets/images/cristaleslluvia01.png")}
-            alt=""
-          />
-        </a>
-      </div>
+        <div className="DIVGuacamaya">
+          <a href="#" onClick={handleOnClick} data-target="#Guacamaya">
+            <img
+              className="Guacamaya"
+              src={require("../assets/images/Guacamaya.gif")}
+            />
+          </a>
+        </div>
 
-      <div className="Diamante2">
-        <a
-          href="/"
-          data-toggle="modal"
-          data-target="#Diamante2"
-          onClick={handleOnClick}
-        >
-          <img
-            className="diamante2"
-            src={require("../assets/images/cristaleslluvia02.png")}
-            alt=""
-          />
-        </a>
-      </div>
-      <div className="Diamante3">
-        <a
-          href="/"
-          data-toggle="modal"
-          data-target="#Diamante3"
-          onClick={handleOnClick}
-        >
-          <img
-            className="diamante3"
-            src={require("../assets/images/cristaleslluvia03.png")}
-            alt=""
-          />
-        </a>
-      </div>
-      <div className="Diamante4">
-        <a
-          href="/"
-          data-toggle="modal"
-          data-target="#Diamante4"
-          onClick={handleOnClick}
-        >
-          <img
-            className="diamante4"
-            src={require("../assets/images/cristaleslluvia04.png")}
-            alt=""
-          />
-        </a>
-      </div>
+        <div className="Diamante1">
+          <a href="#" onClick={handleOnClick} data-target="#Diamante1">
+            <img
+              className="diamante1"
+              src={require("../assets/images/cristaleslluvia01.png")}
+            />
+          </a>
+        </div>
 
-      <div className="Diamante5">
-        <a
-          href="/"
-          data-toggle="modal"
-          data-target="#Diamante5"
-          onClick={handleOnClick}
-        >
-          <img
-            className="diamante5"
-            src={require("../assets/images/cristaleslluvia05.png")}
-            alt=""
-          />
-        </a>
-      </div>
+        <div className="Diamante2">
+          <a href="#" onClick={handleOnClick} data-target="#Diamante2">
+            <img
+              className="diamante2"
+              src={require("../assets/images/cristaleslluvia02.png")}
+            />
+          </a>
+        </div>
+        <div className="Diamante3">
+          <a href="#" onClick={handleOnClick} data-target="#Diamante3">
+            <img
+              className="diamante3"
+              src={require("../assets/images/cristaleslluvia03.png")}
+            />
+          </a>
+        </div>
+        <div className="Diamante4">
+          <a href="#" onClick={handleOnClick} data-target="#Diamante4">
+            <img
+              className="diamante4"
+              src={require("../assets/images/cristaleslluvia04.png")}
+            />
+          </a>
+        </div>
 
-      <div className="contentBosque">
+        <div className="Diamante5">
+          <a href="#" onClick={handleOnClick} data-target="#Diamante5">
+            <img
+              className="diamante5"
+              src={require("../assets/images/cristaleslluvia05.png")}
+            />
+          </a>
+        </div>
+
+        <div className="contentOlas">
+          <img
+            className="olas"
+            alt=""
+            src={require("../assets/images/olas.gif")}
+          />
+        </div>
         <img
-          className="bosque"
-          src={require("../assets/images/bosque.png")}
-          alt=""
+          className="splash1"
+          src={require("../assets/images/Splash_GIF.gif")}
         />
-      </div>
-
-      <div className="contentOlas">
-        <img className="olas" src="images/olas.gif" alt="" />
-      </div>
-      <img
-        className="splash1"
-        src={require("../assets/images/Splash_GIF.gif")}
-        alt=""
-      />
-      <img
-        className="splash2"
-        src={require("../assets/images/Splash_GIF.gif")}
-        alt=""
-      />
-
-      <div className="contentTiburcio">
         <img
-          className="tiburcio"
-          src={require("../assets/images/tiburcio.png")}
-          alt=""
+          className="splash2"
+          src={require("../assets/images/Splash_GIF.gif")}
         />
-      </div>
+        <div className="contentTiburcio">
+          <img
+            className="tiburcio"
+            src={require("../assets/images/tiburcio.png")}
+          />
+        </div>
+      </section>
 
       <Modal
         className="modal-landing"
