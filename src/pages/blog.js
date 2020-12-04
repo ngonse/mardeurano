@@ -38,16 +38,15 @@ const Blog = ({ data, location }) => {
                   {/* Card 1 */}
                   <div className="col-4">
                     <div className="card p-0">
-                      <Link to="/new-page">
-                        <img
-                          className="card-img-top"
-                          src={require("../assets/images/misma1.png")}
-                          alt="Card image cap"
-                        />
-                      </Link>
+                      <img
+                        className="card-img-top"
+                        src={require("../assets/images/misma1.png")}
+                        alt="Card image cap"
+                      />
+
                       <div className="card-body">
                         <h5 className="card-title">
-                          <Link to="/new-page">NEW WEBSITE & BLOG LAUNCH!</Link>
+                          NEW WEBSITE & BLOG LAUNCH!
                         </h5>
                         <h6 className="card-title">10/10/2020</h6>
                         <p className="card-text">
@@ -73,19 +72,15 @@ const Blog = ({ data, location }) => {
                   {/* Card 2 */}
                   <div className="col-4">
                     <div className="card p-0">
-                      <Link to="/mito-page">
-                        <img
-                          className="card-img-top"
-                          src={require("../assets/images/misma2.png")}
-                          alt="Card image cap"
-                        />
-                      </Link>
+                      <img
+                        className="card-img-top"
+                        src={require("../assets/images/misma2.png")}
+                        alt="Card image cap"
+                      />
+
                       <div className="card-body">
                         <h5 className="card-title">
-                          <Link to="/mito-page">
-                            MITO. A poem that tells you more about this
-                            painting.
-                          </Link>
+                          MITO. A poem that tells you more about this painting.
                         </h5>
                         <h6 className="card-title">11/11/2020</h6>
                         <p className="card-text">
