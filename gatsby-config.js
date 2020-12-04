@@ -45,6 +45,7 @@ module.exports = {
         verbose: true,
       },
     },
+    `gatsby-plugin-netlify`,
     // {
     //   resolve: "gatsby-plugin-mailchimp",
     //   options: {
