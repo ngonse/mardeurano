@@ -36,7 +36,7 @@ const Blog = ({ data, location }) => {
               <div className="row">
                 <div className="col-12 d-flex justify-content-start align-items-stretch flex-wrap">
                   {/* Card 1 */}
-                  <div className="col-4">
+                  <div className="col-12 col-sm-6 col-md-4">
                     <div className="card p-0">
                       <img
                         className="card-img-top"
@@ -70,7 +70,7 @@ const Blog = ({ data, location }) => {
                     </div>
                   </div>
                   {/* Card 2 */}
-                  <div className="col-4">
+                  <div className="col-12 col-sm-6 col-md-4">
                     <div className="card p-0">
                       <img
                         className="card-img-top"
